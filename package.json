@@ -9,10 +9,12 @@
   },
   "scripts": {
     "start:dev": "nodemon ./server/server.js",
-    "build:dev": "webpack --watch"
+    "build:dev": "webpack --watch",
+    "db:seed": "node ./database/seed/pictures.seed.js"
   },
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.9.27",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
@@ -23,6 +25,7 @@
     "babel-loader": "^8.1.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "nodemon": "^2.0.4",
+    "sprintf-js": "^1.1.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
