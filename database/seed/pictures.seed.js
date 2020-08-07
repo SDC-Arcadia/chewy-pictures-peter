@@ -1,23 +1,8 @@
-const sprintf = require('sprintf-js').sprintf;
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-//define db connection, schema and model
-mongoose.connect('mongodb://localhost/FEC', {useNewUrlParser: true}, function(error) {
-  if (error) {
-    console.log('connection error', error);
-  } else {
-    console.log('db connected')
-  }
-});
+const { sprintf}  = require('sprintf-js');
+const { db, Picture } = require('../dbConnection.js');
 
 
-const pictureSchema = new Schema({
-  productId: String,
-  images: [{ imgId: String }]
-}, { collection: 'Pictures'});
-
-const Picture = mongoose.model('Picture', pictureSchema);
 
 //build array of data to insert into db
 const pictureData = [];
@@ -42,6 +27,7 @@ Picture.insertMany(pictureData, function(error, docs) {
   if (error) {
     console.log('error inserting into db:', error);
   } else {
-    console.log('documents inserted:');
+    console.log('documents inserted');
+    db.close();
   }
 })
