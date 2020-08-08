@@ -9,10 +9,6 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public'),
   },
-  devServer: {
-    publicPath: path.join(__dirname, 'public'),
-    port: 9000
-  },
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -21,7 +17,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets:['@babel/preset-env', '@babel/preset-react']
+            presets: ['@babel/preset-env', '@babel/preset-react', 'airbnb']
           }
         }
       }

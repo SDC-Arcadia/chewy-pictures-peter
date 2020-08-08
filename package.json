@@ -7,6 +7,12 @@
   "engines": {
     "node": ">=6.13.0"
   },
+  "eslintConfig": {
+    "extends": ["hackreactor", "plugin:react/recommended"],
+    "parserOptions": {
+      "ecmaVersion": 6
+    }
+  },
   "scripts": {
     "start:dev": "nodemon ./server/server.js",
     "build:dev": "webpack --watch",
@@ -23,7 +29,10 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "babel-preset-airbnb": "^5.0.0",
+    "eslint": "^7.6.0",
+    "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor",
+    "eslint-plugin-react": "^7.20.5",
     "nodemon": "^2.0.4",
     "sprintf-js": "^1.1.2",
     "webpack": "^4.44.1",
