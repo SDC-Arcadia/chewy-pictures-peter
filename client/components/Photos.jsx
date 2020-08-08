@@ -18,9 +18,11 @@ export default class Photos extends React.Component {
     //fetch photos for that product and update state
     const productId = this.props.product;
 
-    fetch(`${S3_URL}/${productId}`)
+    fetch(`/${productId}`)
       .then(response => response.json())
-      .then(response_data => console.log('photo service response:', response_data));
+      .then(response_data => {
+        console.log('photo service response:', response_data);
+      });
   }
 
   render() {
