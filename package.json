@@ -8,7 +8,10 @@
     "node": ">=6.13.0"
   },
   "eslintConfig": {
-    "extends": ["hackreactor", "plugin:react/recommended"],
+    "extends": [
+      "hackreactor",
+      "plugin:react/recommended"
+    ],
     "parserOptions": {
       "ecmaVersion": 6
     }
@@ -34,6 +37,7 @@
     "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor",
     "eslint-plugin-react": "^7.20.5",
     "nodemon": "^2.0.4",
+    "prop-types": "^15.7.2",
     "sprintf-js": "^1.1.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
