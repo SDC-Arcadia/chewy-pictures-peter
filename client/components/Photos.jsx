@@ -2,10 +2,12 @@ import React from 'react';
 import S3_URL from '../lib/s3.js';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import PhotoList from './PhotoList.jsx';
+import MainPhoto from './MainPhoto.jsx';
 
 const Container = styled.div`
   display: grid;
-  height: 100vh;
+  height: 600px;
   grid-template-columns: 1fr 5fr;
   grid-template-rows: .5fr 6fr .5fr;
   grid-template-areas:
@@ -64,8 +66,22 @@ export default class Photos extends React.Component {
   }
 
   render() {
+
+    const { photoList, mainPhoto } = this.state;
+
     return (
-      <div><h1>APP PLACEHOLDER</h1></div>
+      <Container>
+        <Thumbnails>
+          <PhotoList
+            photos={photoList}
+            s3={S3_URL} />
+        </Thumbnails>
+        <Photo>
+          <MainPhoto
+            photo={mainPhoto}
+            s3={S3_URL} />
+        </Photo>
+      </Container>
     );
 
   }
