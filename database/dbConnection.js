@@ -20,5 +20,19 @@ const pictureSchema = new Schema({
 
 const Picture = mongoose.model('Picture', pictureSchema);
 
+const queryProduct = function (productId, callback) {
+
+  Picture.findOne({ 'product_id': productId }, function(err, result) {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log('result of db call for invalid item', result);
+      callback(null, result);
+    }
+  });
+
+};
+
 module.exports.db = db;
 module.exports.Picture = Picture;
+module.exports.queryProduct = queryProduct;
