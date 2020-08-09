@@ -10,7 +10,7 @@ app.use(express.static(path.resolve(__dirname, '../public')));
 
 //GET route for photos - returns product object containing img_ids for client to render from AWS bucket
 app.get('/:productId', (req, res) => {
-  //
+  
   let product = req.params.productId;
   console.log('product info requested', product);
   //query db for product

@@ -20,9 +20,19 @@ export default class Photos extends React.Component {
 
     fetch(`/${productId}`)
       .then(response => response.json())
-      .then(response_data => {
-        console.log('photo service response:', response_data);
-      });
+      .then(responseData => {
+        //add images in response data to array and set state
+        const imgArray = [];
+
+        responseData.images.map(image => imgArray.push(image['img_id']));
+
+        this.setState({
+          photoList: imgArray,
+          mainPhoto: imgArray[0]
+        });
+
+      })
+      .catch(err => console.log('Error Fetching Product Images'));
   }
 
   render() {

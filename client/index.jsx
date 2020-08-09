@@ -2,4 +2,4 @@ import Photos from './components/Photos.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-ReactDOM.render(<Photos product="P501"/>, document.getElementById('Photos'));
+ReactDOM.render(<Photos product="P101"/>, document.getElementById('Photos'));
