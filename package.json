@@ -10,7 +10,8 @@
   "eslintConfig": {
     "extends": [
       "hackreactor",
-      "plugin:react/recommended"
+      "airbnb",
+      "airbnb/hooks"
     ],
     "parserOptions": {
       "ecmaVersion": 6
@@ -35,8 +36,12 @@
     "babel-loader": "^8.1.0",
     "babel-preset-airbnb": "^5.0.0",
     "eslint": "^7.6.0",
+    "eslint-config-airbnb": "^18.2.0",
     "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react-hooks": "^4.0.8",
     "nodemon": "^2.0.4",
     "prop-types": "^15.7.2",
     "sprintf-js": "^1.1.2",
