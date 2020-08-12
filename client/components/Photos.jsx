@@ -1,9 +1,9 @@
 import React from 'react';
-import S3_URL from '../lib/s3.js';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import PhotoList from './PhotoList.jsx';
-import MainPhoto from './MainPhoto.jsx';
+import PhotoList from './PhotoList';
+import MainPhoto from './MainPhoto';
+import S3_URL from '../lib/s3';
 
 const Container = styled.div`
   display: grid;
@@ -40,18 +40,17 @@ export default class Photos extends React.Component {
 
     this.state = {
       photoList: [],
-      mainPhoto: ''
+      mainPhoto: '',
     };
-
   }
 
   componentDidMount() {
-    //initial product was passed as props.product
-    //fetch photos for that product and update state
-    const productId = this.props.product;
+    // initial product was passed as props.product
+    // fetch photos for that product and update state
+    const { productId } = this.props.product;
 
     fetch(`/${productId}`)
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(responseData => {
         //add images in response data to array and set state
         const imgArray = [];
