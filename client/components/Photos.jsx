@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import PhotoList from './PhotoList';
 import MainPhoto from './MainPhoto';
-import S3_URL from '../lib/s3';
 
 const Container = styled.div`
   display: grid;
@@ -42,52 +41,57 @@ export default class Photos extends React.Component {
       photoList: [],
       mainPhoto: '',
     };
+
+    this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
   }
 
   componentDidMount() {
     // initial product was passed as props.product
     // fetch photos for that product and update state
-    const { productId } = this.props.product;
-
+    const { productId } = this.props;
+    // eslint-disable-next-line no-undef
     fetch(`/photos/${productId}`)
-      .then(response => response.json())
-      .then(responseData => {
-        //add images in response data to array and set state
-
+      .then((response) => response.json())
+      .then((responseData) => {
+        // add images in response data to array and set state
         const imgArray = responseData.image_urls.slice();
 
         this.setState({
           photoList: imgArray,
-          mainPhoto: imgArray[0]
+          mainPhoto: imgArray[0],
         });
-
       })
-      .catch(err => console.log('Error Fetching Product Images'));
+      // eslint-disable-next-line no-console
+      .catch((err) => console.log('Error Fetching Product Images:', err));
+  }
+
+  handleThumbnailMouseOver(e) {
+    const updatedImg = e.target.src;
+    this.setState({
+      mainPhoto: updatedImg,
+    });
   }
 
   render() {
-
     const { photoList, mainPhoto } = this.state;
-
     return (
       <Container>
         <Thumbnails>
           <PhotoList
             photos={photoList}
-            s3={S3_URL} />
+            onMouseOver={this.handleThumbnailMouseOver}
+          />
         </Thumbnails>
         <Photo>
           <MainPhoto
             photo={mainPhoto}
-            s3={S3_URL} />
+          />
         </Photo>
       </Container>
     );
-
   }
-
 }
 
 Photos.propTypes = {
-  product: PropTypes.string
+  productId: PropTypes.string.isRequired,
 };

@@ -9,15 +9,15 @@ const List = styled.div`
   justify-content: center; */}
 `;
 
-const PhotoList = ({ photos, s3 }) => {
+const PhotoList = ({ photos, onMouseOver }) => (
   <List>
-    {photos.map((photo) => <Thumbnail photo={photo} key={photo} s3={s3} />)}
-  </List>;
-};
+    {photos.map((photo) => <Thumbnail photo={photo} key={photo} onMouseOver={onMouseOver} />)}
+  </List>
+);
 
 export default PhotoList;
 
 PhotoList.propTypes = {
   photos: PropTypes.arrayOf(PropTypes.string).isRequired,
-  s3: PropTypes.string.isRequired,
+  onMouseOver: PropTypes.func.isRequired,
 };
