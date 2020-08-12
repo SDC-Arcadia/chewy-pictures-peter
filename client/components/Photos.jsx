@@ -49,13 +49,12 @@ export default class Photos extends React.Component {
     // fetch photos for that product and update state
     const { productId } = this.props.product;
 
-    fetch(`/${productId}`)
-      .then((response) => response.json())
+    fetch(`/photos/${productId}`)
+      .then(response => response.json())
       .then(responseData => {
         //add images in response data to array and set state
-        const imgArray = [];
 
-        responseData.images.map(image => imgArray.push(image['img_id']));
+        const imgArray = responseData.image_urls.slice();
 
         this.setState({
           photoList: imgArray,
