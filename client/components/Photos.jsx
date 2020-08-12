@@ -7,7 +7,9 @@ import MainPhoto from './MainPhoto.jsx';
 
 const Container = styled.div`
   display: grid;
-  height: 600px;
+  height: 450px;
+  position: relative;
+  box-sizing: border-box;
   grid-template-columns: 1fr 5fr;
   grid-template-rows: .5fr 6fr .5fr;
   grid-template-areas:
