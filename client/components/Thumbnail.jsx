@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ThumbContainer = styled.div`
-  display: block;
+
+  ${'' /* display: block;
   width: 100px;
-  height: 100px;
+  height: 100px; */}
 `;
 
 const Thumb = styled.img`
@@ -18,22 +19,33 @@ const Thumb = styled.img`
   text-align: center;
   padding: 1px 6px;
   margin: 0 4px 4px 0;
-  border: 1px solid #ddd;
+  ${'' /* eslint-disable-next-line no-confusing-arrow */}
+  border: ${(props) => props.active ? '2px solid orange' : '1px solid #ddd'};
 
-  ${ThumbContainer}:hover & {
+  ${'' /* ${ThumbContainer}:hover & {
     border: 2px solid orange;
-  }
+  } */}
 `;
 
-const Thumbnail = ({ photo, onMouseOver }) => (
-  <ThumbContainer>
-    <Thumb src={photo} onMouseEnter={onMouseOver} />
-  </ThumbContainer>
-);
+const Thumbnail = ({ photo, activeThumb, onMouseOver }) => {
+  if (photo === activeThumb) {
+    return (
+      <ThumbContainer>
+        <Thumb active src={photo} onMouseEnter={onMouseOver} />
+      </ThumbContainer>
+    );
+  }
+  return (
+    <ThumbContainer>
+      <Thumb src={photo} onMouseEnter={onMouseOver} />
+    </ThumbContainer>
+  );
+};
 
 export default Thumbnail;
 
 Thumbnail.propTypes = {
   photo: PropTypes.string.isRequired,
+  activeThumb: PropTypes.string.isRequired,
   onMouseOver: PropTypes.func.isRequired,
 };

@@ -5,7 +5,16 @@ import PhotoList from './PhotoList';
 import MainPhoto from './MainPhoto';
 
 const Container = styled.div`
-  display: grid;
+  box-sizing: border-box;
+  float:left;
+  width:500px;
+  height:500px;
+  padding-right:30px;
+  position:relative;
+  border: red;
+
+
+  ${'' /* display: grid;
   height: 450px;
   position: relative;
   box-sizing: border-box;
@@ -19,18 +28,27 @@ const Container = styled.div`
     "thumbs main"
     "thumbs main"
     "thumbs main"
-    "down zoom"
+    "down zoom" */}
 `;
 
 const Thumbnails = styled.div`
-  background: yellow;
-  grid-area: thumbs;
+  ${'' /* background: yellow;
+  grid-area: thumbs; */}
+  box-sizing: border-box;
+  width: 100%;
+  height: 391px;
+  white-space: nowrap;
 `;
 
 const Photo = styled.div`
-  background: green;
-  grid-area: main;
-
+  ${'' /* background: green;
+  grid-area: main; */}
+  display: table-cell;
+  width: 100%;
+  height: 400px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
 `;
 
 export default class Photos extends React.Component {
@@ -40,6 +58,7 @@ export default class Photos extends React.Component {
     this.state = {
       photoList: [],
       mainPhoto: '',
+      activeThumb: '',
     };
 
     this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
@@ -59,6 +78,7 @@ export default class Photos extends React.Component {
         this.setState({
           photoList: imgArray,
           mainPhoto: imgArray[0],
+          activeThumb: imgArray[0],
         });
       })
       // eslint-disable-next-line no-console
@@ -69,16 +89,18 @@ export default class Photos extends React.Component {
     const updatedImg = e.target.src;
     this.setState({
       mainPhoto: updatedImg,
+      activeThumb: updatedImg,
     });
   }
 
   render() {
-    const { photoList, mainPhoto } = this.state;
+    const { photoList, mainPhoto, activeThumb } = this.state;
     return (
       <Container>
         <Thumbnails>
           <PhotoList
             photos={photoList}
+            activeThumb={activeThumb}
             onMouseOver={this.handleThumbnailMouseOver}
           />
         </Thumbnails>
