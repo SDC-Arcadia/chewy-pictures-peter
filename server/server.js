@@ -17,7 +17,6 @@ const buildApiResponse = (dbRecord) => {
   dbRecord.images.forEach((image) => {
     apiResponse.image_urls.push(S3_URL + image.img_id);
   });
-
   return apiResponse;
 };
 
