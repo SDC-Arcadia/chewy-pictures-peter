@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const ThumbContainer = styled.div`
-
-  ${'' /* display: block;
-  width: 100px;
-  height: 100px; */}
+const ThumbWrapper = styled.div`
+  display: block;
+  border: 10px dotted cyan;
 `;
 
 const Thumb = styled.img`
   border-radius: 4px;
+  box-sizing: border-box;
   width: 70px;
   height: 60px;
   display: block;
@@ -21,24 +20,20 @@ const Thumb = styled.img`
   margin: 0 4px 4px 0;
   ${'' /* eslint-disable-next-line no-confusing-arrow */}
   border: ${(props) => props.active ? '2px solid orange' : '1px solid #ddd'};
-
-  ${'' /* ${ThumbContainer}:hover & {
-    border: 2px solid orange;
-  } */}
 `;
 
 const Thumbnail = ({ photo, activeThumb, onMouseOver }) => {
   if (photo === activeThumb) {
     return (
-      <ThumbContainer>
+      <ThumbWrapper>
         <Thumb active src={photo} onMouseEnter={onMouseOver} />
-      </ThumbContainer>
+      </ThumbWrapper>
     );
   }
   return (
-    <ThumbContainer>
+    <ThumbWrapper>
       <Thumb src={photo} onMouseEnter={onMouseOver} />
-    </ThumbContainer>
+    </ThumbWrapper>
   );
 };
 

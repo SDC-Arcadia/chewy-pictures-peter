@@ -7,48 +7,22 @@ import MainPhoto from './MainPhoto';
 const Container = styled.div`
   box-sizing: border-box;
   float:left;
-  width:500px;
-  height:500px;
-  padding-right:30px;
   position:relative;
-  border: red;
-
-
-  ${'' /* display: grid;
-  height: 450px;
-  position: relative;
-  box-sizing: border-box;
-  grid-template-columns: 1fr 5fr;
-  grid-template-rows: .5fr 6fr .5fr;
-  grid-template-areas:
-    "up main"
-    "thumbs main"
-    "thumbs main"
-    "thumbs main"
-    "thumbs main"
-    "thumbs main"
-    "thumbs main"
-    "down zoom" */}
+  border: 5px solid red;
 `;
 
-const Thumbnails = styled.div`
-  ${'' /* background: yellow;
-  grid-area: thumbs; */}
-  box-sizing: border-box;
-  width: 100%;
-  height: 391px;
-  white-space: nowrap;
+const MediaWrapper = styled.div`
+  display: inline-block;
+  height: 500px;
+  border: 5px solid purple;
 `;
 
-const Photo = styled.div`
-  ${'' /* background: green;
-  grid-area: main; */}
-  display: table-cell;
-  width: 100%;
-  height: 400px;
-  text-align: center;
-  vertical-align: middle;
-  position: relative;
+const MainPhotoWrapper = styled.div`
+  border: 5px solid yellow;
+  display: inline-block;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  box-size: border-box;
 `;
 
 export default class Photos extends React.Component {
@@ -72,6 +46,10 @@ export default class Photos extends React.Component {
     fetch(`/photos/${productId}`)
       .then((response) => response.json())
       .then((responseData) => {
+        // Determine if fetch returned an error, if so, throw it
+        if (responseData.error) {
+          throw Error(responseData.error);
+        }
         // add images in response data to array and set state
         const imgArray = responseData.image_urls.slice();
 
@@ -97,18 +75,19 @@ export default class Photos extends React.Component {
     const { photoList, mainPhoto, activeThumb } = this.state;
     return (
       <Container>
-        <Thumbnails>
+
+        <MediaWrapper>
           <PhotoList
             photos={photoList}
             activeThumb={activeThumb}
             onMouseOver={this.handleThumbnailMouseOver}
           />
-        </Thumbnails>
-        <Photo>
-          <MainPhoto
-            photo={mainPhoto}
-          />
-        </Photo>
+          <MainPhotoWrapper>
+            <MainPhoto
+              photo={mainPhoto}
+            />
+          </MainPhotoWrapper>
+        </MediaWrapper>
       </Container>
     );
   }

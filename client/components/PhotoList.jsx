@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Thumbnail from './Thumbnail';
 
-const List = styled.div`
+const ThumbnailListWrapper = styled.div`
+  display: inline-block;
+  border: 5px solid blue;
 `;
 
 const PhotoList = ({ photos, activeThumb, onMouseOver }) => (
-  <List>
+  <ThumbnailListWrapper>
     {photos.map((photo) => (
       <Thumbnail
         photo={photo}
@@ -16,7 +18,7 @@ const PhotoList = ({ photos, activeThumb, onMouseOver }) => (
         onMouseOver={onMouseOver}
       />
     ))}
-  </List>
+  </ThumbnailListWrapper>
 );
 
 export default PhotoList;
