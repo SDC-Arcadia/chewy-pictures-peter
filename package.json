@@ -18,8 +18,12 @@
     }
   },
   "jest": {
-    "setupFilesAfterEnv": ["./spec/spec.setup.js"],
-    "testMatch": ["**/spec/**/*.test.js"]
+    "setupFilesAfterEnv": [
+      "./spec/spec.setup.js"
+    ],
+    "testMatch": [
+      "**/spec/**/*.test.js"
+    ]
   },
   "scripts": {
     "start:dev": "nodemon ./server/server.js",
@@ -28,15 +32,17 @@
     "test": "jest --verbose"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1",
     "mongoose": "^5.9.27",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "styled-components": "^5.1.1",
-    "prop-types": "^15.7.2"
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
+    "@babel/plugin-syntax-jsx": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "babel-jest": "^26.3.0",
