@@ -8,5 +8,13 @@ module.exports = {
         },
       },
     ],
+    [
+      '@babel/preset-react',
+      {
+        targets: {
+          node: 'current',
+        },
+      },
+    ],
   ],
 };

@@ -20,9 +20,6 @@
   "jest": {
     "setupFilesAfterEnv": [
       "./spec/spec.setup.js"
-    ],
-    "testMatch": [
-      "**/spec/**/*.test.js"
     ]
   },
   "scripts": {
