@@ -1,6 +1,29 @@
 import React from 'react';
-import S3_URL from '../lib/s3.js';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import PhotoList from './PhotoList';
+import MainPhoto from './MainPhoto';
+
+const Container = styled.div`
+  box-sizing: border-box;
+  float:left;
+  position:relative;
+  border: 5px solid red;
+`;
+
+const MediaWrapper = styled.div`
+  display: inline-block;
+  height: 500px;
+  border: 5px solid purple;
+`;
+
+const MainPhotoWrapper = styled.div`
+  border: 5px solid yellow;
+  display: inline-block;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  box-size: border-box;
+`;
 
 export default class Photos extends React.Component {
   constructor(props) {
@@ -8,41 +31,68 @@ export default class Photos extends React.Component {
 
     this.state = {
       photoList: [],
-      mainPhoto: ''
+      mainPhoto: '',
+      activeThumb: '',
     };
 
+    this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
   }
 
   componentDidMount() {
-    //initial product was passed as props.product
-    //fetch photos for that product and update state
-    const productId = this.props.product;
-
+    // initial product was passed as props.product
+    // fetch photos for that product and update state
+    const { productId } = this.props;
+    // eslint-disable-next-line no-undef
     fetch(`/photos/${productId}`)
-      .then(response => response.json())
-      .then(responseData => {
-        //add images in response data to array and set state
-
+      .then((response) => response.json())
+      .then((responseData) => {
+        // Determine if fetch returned an error, if so, throw it
+        if (responseData.error) {
+          throw Error(responseData.error);
+        }
+        // add images in response data to array and set state
         const imgArray = responseData.image_urls.slice();
 
         this.setState({
           photoList: imgArray,
-          mainPhoto: imgArray[0]
+          mainPhoto: imgArray[0],
+          activeThumb: imgArray[0],
         });
-
       })
-      .catch(err => console.log('Error Fetching Product Images'));
+      // eslint-disable-next-line no-console
+      .catch((err) => console.log('Error Fetching Product Images:', err));
+  }
+
+  handleThumbnailMouseOver(e) {
+    const updatedImg = e.target.src;
+    this.setState({
+      mainPhoto: updatedImg,
+      activeThumb: updatedImg,
+    });
   }
 
   render() {
+    const { photoList, mainPhoto, activeThumb } = this.state;
     return (
-      <div><h1>APP PLACEHOLDER</h1></div>
+      <Container>
+
+        <MediaWrapper>
+          <PhotoList
+            photos={photoList}
+            activeThumb={activeThumb}
+            onMouseOver={this.handleThumbnailMouseOver}
+          />
+          <MainPhotoWrapper>
+            <MainPhoto
+              photo={mainPhoto}
+            />
+          </MainPhotoWrapper>
+        </MediaWrapper>
+      </Container>
     );
-
   }
-
 }
 
 Photos.propTypes = {
-  product: PropTypes.string
+  productId: PropTypes.string.isRequired,
 };

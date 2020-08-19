@@ -1,5 +1,5 @@
-import Photos from './components/Photos.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-ReactDOM.render(<Photos product="P101"/>, document.getElementById('Photos'));
+import Photos from './components/Photos';
+// eslint-disable-next-line no-undef
+ReactDOM.render(<Photos productId="P001" />, document.getElementById('Photos'));
