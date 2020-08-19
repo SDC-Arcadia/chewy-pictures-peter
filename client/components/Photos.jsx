@@ -3,26 +3,30 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import PhotoList from './PhotoList';
 import MainPhoto from './MainPhoto';
+import Prev from './Prev';
 
 const Container = styled.div`
-  box-sizing: border-box;
-  float:left;
-  position:relative;
-  border: 5px solid red;
-`;
+  margin: 25px;
+  display: grid;
 
-const MediaWrapper = styled.div`
-  display: inline-block;
-  height: 500px;
-  border: 5px solid purple;
+  grid-template-rows: min-content min-content min-content;
+  grid-template-columns: min-content min-content;
+  grid-template-areas: "prev main"
+                       "thumbs main"
+                       "next zoom";
+
+  @media screen and (max-width: 650px) {
+    grid-template-rows: min-content min-content;
+    grid-template-columns: min-content min-content min-content;
+    grid-template-areas: "main main main"
+                         "prev thumbs next";
+  }
+  grid-gap: 10px;
+  border: 5px solid blue;
 `;
 
 const MainPhotoWrapper = styled.div`
-  border: 5px solid yellow;
-  display: inline-block;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  box-size: border-box;
+  grid-area: main;
 `;
 
 export default class Photos extends React.Component {
@@ -75,19 +79,17 @@ export default class Photos extends React.Component {
     const { photoList, mainPhoto, activeThumb } = this.state;
     return (
       <Container>
-
-        <MediaWrapper>
-          <PhotoList
-            photos={photoList}
-            activeThumb={activeThumb}
-            onMouseOver={this.handleThumbnailMouseOver}
+        <Prev />
+        <PhotoList
+          photos={photoList}
+          activeThumb={activeThumb}
+          onMouseOver={this.handleThumbnailMouseOver}
+        />
+        <MainPhotoWrapper>
+          <MainPhoto
+            photo={mainPhoto}
           />
-          <MainPhotoWrapper>
-            <MainPhoto
-              photo={mainPhoto}
-            />
-          </MainPhotoWrapper>
-        </MediaWrapper>
+        </MainPhotoWrapper>
       </Container>
     );
   }
