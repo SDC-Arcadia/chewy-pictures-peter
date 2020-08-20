@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import PhotoList from './PhotoList';
 import MainPhoto from './MainPhoto';
 import Prev from './Prev';
+import Next from './Next';
+import Zoom from './Zoom';
 
 const Container = styled.div`
   margin: 25px;
@@ -19,6 +21,7 @@ const Container = styled.div`
     grid-template-rows: min-content min-content;
     grid-template-columns: min-content min-content min-content;
     grid-template-areas: "main main main"
+                         "zoom zoom zoom"
                          "prev thumbs next";
   }
   grid-gap: 10px;
@@ -27,6 +30,9 @@ const Container = styled.div`
 
 const MainPhotoWrapper = styled.div`
   grid-area: main;
+  box-sizing: border-box;
+  height: 400px;
+  width: 440px;
 `;
 
 export default class Photos extends React.Component {
@@ -85,11 +91,14 @@ export default class Photos extends React.Component {
           activeThumb={activeThumb}
           onMouseOver={this.handleThumbnailMouseOver}
         />
+
         <MainPhotoWrapper>
           <MainPhoto
             photo={mainPhoto}
           />
         </MainPhotoWrapper>
+        <Zoom />
+        <Next />
       </Container>
     );
   }

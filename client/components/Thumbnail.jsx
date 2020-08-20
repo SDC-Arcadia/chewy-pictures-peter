@@ -6,13 +6,13 @@ const Thumb = styled.img`
   display: flex;
   border-radius: 4px;
   box-sizing: border-box;
-  width: 70px;
+  width: 90px;
   height: 60px;
   float: left;
   vertical-align: middle;
   text-align: center;
-  padding: 1px 6px;
-  margin: 0 4px 4px 0;
+  padding: 1px 17px 1px 17px;
+  margin: 0 4px 6px 0;
   ${'' /* eslint-disable-next-line no-confusing-arrow */}
   border: ${(props) => props.active ? '2px solid orange' : '1px solid #ddd'};
 `;
