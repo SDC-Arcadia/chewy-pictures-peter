@@ -6,6 +6,10 @@ import MainPhoto from './MainPhoto';
 import Prev from './Prev';
 import Next from './Next';
 import Zoom from './Zoom';
+import MainPhotoPortalWrapper from './MainPhotoPortalWrapper';
+import MainPhotoPortal from './MainPhotoPortal';
+
+
 
 const Container = styled.div`
   margin: 25px;
@@ -43,9 +47,12 @@ export default class Photos extends React.Component {
       photoList: [],
       mainPhoto: '',
       activeThumb: '',
+      portalOn: false,
     };
 
     this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
+    this.handlePortalCreate = this.handlePortalCreate.bind(this);
+    this.handlePortalClose = this.handlePortalClose.bind(this);
   }
 
   componentDidMount() {
@@ -66,7 +73,7 @@ export default class Photos extends React.Component {
         this.setState({
           photoList: imgArray,
           mainPhoto: imgArray[0],
-          activeThumb: imgArray[0],
+          activeThumb: imgArray[0]
         });
       })
       // eslint-disable-next-line no-console
@@ -81,25 +88,53 @@ export default class Photos extends React.Component {
     });
   }
 
-  render() {
-    const { photoList, mainPhoto, activeThumb } = this.state;
-    return (
-      <Container>
-        <Prev />
-        <PhotoList
-          photos={photoList}
-          activeThumb={activeThumb}
-          onMouseOver={this.handleThumbnailMouseOver}
-        />
+  handlePortalCreate(e) {
+    console.log('click!');
+    this.setState({
+      portalOn: true,
+    });
+  }
 
-        <MainPhotoWrapper>
-          <MainPhoto
-            photo={mainPhoto}
+  handlePortalClose(e) {
+    console.log('portal click!');
+    this.setState({
+      portalOn: false,
+    });
+  }
+
+  render() {
+    const { photoList, mainPhoto, activeThumb, portalOn } = this.state;
+    return (
+      <div>
+        <Container>
+          <Prev />
+          <PhotoList
+            photos={photoList}
+            activeThumb={activeThumb}
+            onMouseOver={this.handleThumbnailMouseOver}
           />
-        </MainPhotoWrapper>
-        <Zoom />
-        <Next />
-      </Container>
+
+          <MainPhotoWrapper>
+            <MainPhoto
+              photo={mainPhoto}
+              onClick={this.handlePortalCreate}
+            />
+          </MainPhotoWrapper>
+          <Zoom />
+          <Next />
+        </Container>
+        {
+          portalOn &&
+          (
+            <MainPhotoPortalWrapper>
+              <MainPhotoPortal
+                onClick={this.handlePortalClose}
+                photo={mainPhoto}
+              />
+            </MainPhotoPortalWrapper>
+          )
+        }
+      </div>
     );
   }
 }
