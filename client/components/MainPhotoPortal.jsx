@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const PortalStyle = styled.div`
   background-color: rgba(0,0,0,0.5);
@@ -26,61 +27,36 @@ const ImageStyle = styled.img`
 
 const ZoomedPrevStyle = styled.button`
   grid-area: prev;
-
   width: 58px;
   height: 58px;
   background: url('https://rpt22-fec-kwame.s3-us-west-1.amazonaws.com/images/static/arrow-left-white.svg') no-repeat;
-  background-attachment: scroll;
-  background-origin: padding-box;
-  background-clip: border-box;
   background-color: transparent;
   background-size: 15px 26px;
-  display: block;
-  position: relative;
-  align-text: left;
-  justify-content: center;
-  cursor: pointer;
+  justify-self: start;
   border: none;
 `;
 
 const ZoomedNextStyle = styled.button`
   grid-area: next;
-
   width: 58px;
   height: 58px;
   background: url('https://rpt22-fec-kwame.s3-us-west-1.amazonaws.com/images/static/arrow-right-white.svg') no-repeat;
-  ${'' /* background-attachment: scroll;
-  background-origin: padding-box;
-  background-clip: border-box; */}
   background-color: transparent;
   background-size: 15px 26px;
-  display: block;
-  position: relative;
-  align-text: right;
   justify-self: end;
-  ${'' /* cursor: pointer; */}
   border: none;
 `;
 
 const ZoomedCloseStyle = styled.button`
   grid-area: close;
-
   width: 58px;
   height: 58px;
   background: url('https://rpt22-fec-kwame.s3-us-west-1.amazonaws.com/images/static/icon-close-white.svg') no-repeat;
-  ${'' /* background-attachment: scroll;
-  background-origin: padding-box;
-  background-clip: border-box; */}
   background-color: transparent;
   background-size: 15px 26px;
-  ${'' /* display: flex; */}
-  ${'' /* position: relative; */}
-  ${'' /* align-text: right; */}
   justify-self: end;
-  ${'' /* cursor: pointer; */}
   border: none;
 `;
-
 
 const MainPhotoPortal = ({ photo, onClick }) => (
   <PortalStyle onClick={onClick}>
@@ -92,3 +68,8 @@ const MainPhotoPortal = ({ photo, onClick }) => (
 );
 
 export default MainPhotoPortal;
+
+MainPhotoPortal.propTypes = {
+  photo: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
