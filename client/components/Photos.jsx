@@ -9,8 +9,6 @@ import Zoom from './Zoom';
 import MainPhotoPortalWrapper from './MainPhotoPortalWrapper';
 import MainPhotoPortal from './MainPhotoPortal';
 
-
-
 const Container = styled.div`
   margin: 25px;
   display: grid;
@@ -124,7 +122,8 @@ export default class Photos extends React.Component {
           <Next />
         </Container>
         {
-          portalOn &&
+          portalOn
+          &&
           (
             <MainPhotoPortalWrapper>
               <MainPhotoPortal
