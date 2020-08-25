@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import axios from 'axios';
 import PhotoList from './PhotoList';
@@ -10,7 +9,7 @@ import Zoom from './Zoom';
 import MainPhotoPortalWrapper from './MainPhotoPortalWrapper';
 import MainPhotoPortal from './MainPhotoPortal';
 
-
+const SERVER_URL = 'http://localhost:3004';
 
 const Container = styled.div`
   margin: 25px;
@@ -59,9 +58,12 @@ export default class Photos extends React.Component {
   componentDidMount() {
     // initial product was passed as props.product
     // fetch photos for that product and update state
-    const { productId } = this.props;
 
-    axios.get(`/photos/${productId}`)
+    // eslint-disable-next-line no-undef
+    const parsedUrl = new URL(window.location.href);
+    const productId = parsedUrl.searchParams.get('productId');
+
+    axios.get(`${SERVER_URL}/photos/${productId}`)
       .then((response) => {
         if (response.data.error) {
           throw Error(response.data.error);
@@ -72,7 +74,7 @@ export default class Photos extends React.Component {
         this.setState({
           photoList: imgArray,
           mainPhoto: imgArray[0],
-          activeThumb: imgArray[0]
+          activeThumb: imgArray[0],
         });
       })
       // eslint-disable-next-line no-console
@@ -88,14 +90,12 @@ export default class Photos extends React.Component {
   }
 
   handlePortalCreate(e) {
-    console.log('click!');
     this.setState({
       portalOn: true,
     });
   }
 
   handlePortalClose(e) {
-    console.log('portal click!');
     this.setState({
       portalOn: false,
     });
@@ -137,7 +137,3 @@ export default class Photos extends React.Component {
     );
   }
 }
-
-Photos.propTypes = {
-  productId: PropTypes.string.isRequired,
-};
