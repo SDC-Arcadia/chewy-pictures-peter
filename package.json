@@ -20,9 +20,6 @@
   "jest": {
     "setupFilesAfterEnv": [
       "./spec/spec.setup.js"
-    ],
-    "testMatch": [
-      "**/spec/**/*.test.js"
     ]
   },
   "scripts": {
@@ -43,6 +40,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
+    "@babel/plugin-syntax-jsx": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "aws-cli-js": "^2.0.6",
