@@ -4,26 +4,40 @@ import styled from 'styled-components';
 import axios from 'axios';
 import PhotoList from './PhotoList';
 import MainPhoto from './MainPhoto';
+import Prev from './Prev';
+import Next from './Next';
+import Zoom from './Zoom';
+import MainPhotoPortalWrapper from './MainPhotoPortalWrapper';
+import MainPhotoPortal from './MainPhotoPortal';
+
+
 
 const Container = styled.div`
-  box-sizing: border-box;
-  float:left;
-  position:relative;
-  border: 5px solid red;
-`;
+  margin: 25px;
+  display: grid;
 
-const MediaWrapper = styled.div`
-  display: inline-block;
-  height: 500px;
-  border: 5px solid purple;
+  grid-template-rows: min-content min-content min-content;
+  grid-template-columns: min-content min-content;
+  grid-template-areas: "prev main"
+                       "thumbs main"
+                       "next zoom";
+
+  @media screen and (max-width: 650px) {
+    grid-template-rows: min-content min-content;
+    grid-template-columns: min-content min-content min-content;
+    grid-template-areas: "main main main"
+                         "zoom zoom zoom"
+                         "prev thumbs next";
+  }
+  grid-gap: 10px;
+  border: 5px solid blue;
 `;
 
 const MainPhotoWrapper = styled.div`
-  border: 5px solid yellow;
-  display: inline-block;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  box-size: border-box;
+  grid-area: main;
+  box-sizing: border-box;
+  height: 400px;
+  width: 440px;
 `;
 
 export default class Photos extends React.Component {
@@ -34,9 +48,12 @@ export default class Photos extends React.Component {
       photoList: [],
       mainPhoto: '',
       activeThumb: '',
+      portalOn: false,
     };
 
     this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
+    this.handlePortalCreate = this.handlePortalCreate.bind(this);
+    this.handlePortalClose = this.handlePortalClose.bind(this);
   }
 
   componentDidMount() {
@@ -55,7 +72,7 @@ export default class Photos extends React.Component {
         this.setState({
           photoList: imgArray,
           mainPhoto: imgArray[0],
-          activeThumb: imgArray[0],
+          activeThumb: imgArray[0]
         });
       })
       // eslint-disable-next-line no-console
@@ -70,24 +87,53 @@ export default class Photos extends React.Component {
     });
   }
 
-  render() {
-    const { photoList, mainPhoto, activeThumb } = this.state;
-    return (
-      <Container>
+  handlePortalCreate(e) {
+    console.log('click!');
+    this.setState({
+      portalOn: true,
+    });
+  }
 
-        <MediaWrapper>
+  handlePortalClose(e) {
+    console.log('portal click!');
+    this.setState({
+      portalOn: false,
+    });
+  }
+
+  render() {
+    const { photoList, mainPhoto, activeThumb, portalOn } = this.state;
+    return (
+      <div>
+        <Container>
+          <Prev />
           <PhotoList
             photos={photoList}
             activeThumb={activeThumb}
             onMouseOver={this.handleThumbnailMouseOver}
           />
+
           <MainPhotoWrapper>
             <MainPhoto
               photo={mainPhoto}
+              onClick={this.handlePortalCreate}
             />
           </MainPhotoWrapper>
-        </MediaWrapper>
-      </Container>
+          <Zoom />
+          <Next />
+        </Container>
+        {
+          portalOn &&
+          (
+            <MainPhotoPortalWrapper>
+              <MainPhotoPortal
+                onClick={this.handlePortalClose}
+                photo={mainPhoto}
+              />
+            </MainPhotoPortalWrapper>
+          )
+        }
+      </div>
     );
   }
 }

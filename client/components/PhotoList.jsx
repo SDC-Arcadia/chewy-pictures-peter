@@ -4,8 +4,15 @@ import styled from 'styled-components';
 import Thumbnail from './Thumbnail';
 
 const ThumbnailListWrapper = styled.div`
-  display: inline-block;
-  border: 5px solid blue;
+  ${'' /* display: inline-block;
+  border: 5px solid blue; */}
+  grid-area: thumbs;
+  display: flex;
+  border: 5px dotted red;
+
+  @media screen and (min-width: 650px) {
+    flex-direction: column;
+  }
 `;
 
 const PhotoList = ({ photos, activeThumb, onMouseOver }) => (
