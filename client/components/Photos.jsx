@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import axios from 'axios';
 import PhotoList from './PhotoList';
 import MainPhoto from './MainPhoto';
 
@@ -42,16 +43,14 @@ export default class Photos extends React.Component {
     // initial product was passed as props.product
     // fetch photos for that product and update state
     const { productId } = this.props;
-    // eslint-disable-next-line no-undef
-    fetch(`/photos/${productId}`)
-      .then((response) => response.json())
-      .then((responseData) => {
-        // Determine if fetch returned an error, if so, throw it
-        if (responseData.error) {
-          throw Error(responseData.error);
+
+    axios.get(`/photos/${productId}`)
+      .then((response) => {
+        if (response.data.error) {
+          throw Error(response.data.error);
         }
         // add images in response data to array and set state
-        const imgArray = responseData.image_urls.slice();
+        const imgArray = response.data.image_urls.slice();
 
         this.setState({
           photoList: imgArray,
@@ -60,7 +59,7 @@ export default class Photos extends React.Component {
         });
       })
       // eslint-disable-next-line no-console
-      .catch((err) => console.log('Error Fetching Product Images:', err));
+      .catch((error) => console.log('Error Fetching Product Images:', error));
   }
 
   handleThumbnailMouseOver(e) {

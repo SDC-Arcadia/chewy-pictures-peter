@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainPhoto Component should render correctly 1`] = `
+<img
+  alt="pet"
+  src="https://rpt22-fec-kwame.s3.us-west-1.amazonaws.com/images/product/img001.jpeg"
+/>
+`;
