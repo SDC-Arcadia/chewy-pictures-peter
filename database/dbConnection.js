@@ -17,7 +17,7 @@ const db = mongoose.connection;
 
 const pictureSchema = new Schema({
   product_id: String,
-  images: [{ img_id: String }],
+  images: [{ img_url: String }],
 }, { collection: 'Pictures' });
 
 const Picture = mongoose.model('Picture', pictureSchema);
@@ -32,6 +32,15 @@ const queryProduct = (productId, callback) => {
   });
 };
 
+const emptyCollection = (callback) => {
+  Picture.deleteMany({}, (err) => {
+    if (err) {
+      callback(err);
+    }
+  });
+};
+
 module.exports.db = db;
 module.exports.Picture = Picture;
 module.exports.queryProduct = queryProduct;
+module.exports.emptyCollection = emptyCollection;

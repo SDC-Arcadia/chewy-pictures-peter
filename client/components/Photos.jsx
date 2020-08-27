@@ -89,20 +89,25 @@ export default class Photos extends React.Component {
     });
   }
 
-  handlePortalCreate(e) {
+  handlePortalCreate() {
     this.setState({
       portalOn: true,
     });
   }
 
-  handlePortalClose(e) {
+  handlePortalClose() {
     this.setState({
       portalOn: false,
     });
   }
 
   render() {
-    const { photoList, mainPhoto, activeThumb, portalOn } = this.state;
+    const {
+      photoList,
+      mainPhoto,
+      activeThumb,
+      portalOn,
+    } = this.state;
     return (
       <div>
         <Container>
@@ -123,6 +128,7 @@ export default class Photos extends React.Component {
           <Next />
         </Container>
         {
+          // eslint-disable-next-line operator-linebreak
           portalOn &&
           (
             <MainPhotoPortalWrapper>

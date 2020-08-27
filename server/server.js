@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const { queryProduct } = require('../database/dbConnection.js');
-const S3_URL = require('./lib/s3.js');
 
 const app = express();
 const PORT = 3004;
@@ -17,7 +16,7 @@ const buildApiResponse = (dbRecord) => {
   apiResponse.image_urls = [];
 
   dbRecord.images.forEach((image) => {
-    apiResponse.image_urls.push(S3_URL + image.img_id);
+    apiResponse.image_urls.push(image.img_url);
   });
   return apiResponse;
 };
