@@ -23,11 +23,11 @@
     ]
   },
   "scripts": {
-    "start:dev": "nodemon ./server/server.js",
-    "build:dev": "webpack --config webpack.dev.js --watch",
-    "build:prod": "webpack --config webpack.prod.js",
-    "db:seed": "node ./database/seed/pictures.seed.js",
-    "s3:seed": "node ./database/seed/s3.seed.js",
+    "start-server": "nodemon ./server/server.js",
+    "build-dev": "webpack --config webpack.dev.js --watch",
+    "build-prod": "webpack --config webpack.prod.js",
+    "db:setup": "node ./database/seed/pictures.seed.js",
+    "s3:setup": "node ./database/seed/s3.seed.js",
     "test": "jest --verbose"
   },
   "dependencies": {
