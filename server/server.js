@@ -23,7 +23,7 @@ const buildApiResponse = (dbRecord) => {
 
 app.get('/photos/:productId', (req, res) => {
   const product = req.params.productId;
-  // console.log('product info requested', product);
+   console.log('product info requested', product);
   // query db for product
   queryProduct(product, (err, result) => {
     if (err) {

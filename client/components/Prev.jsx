@@ -18,8 +18,8 @@ const PrevTag = styled.a`
   display: none;
 `;
 
-const Prev = () => (
-  <PrevWrapper>
+const Prev = ({ handleClick }) => (
+  <PrevWrapper onClick={handleClick}>
     <PrevTag href="">Prev</PrevTag>
   </PrevWrapper>
 );

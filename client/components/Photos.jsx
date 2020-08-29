@@ -45,6 +45,9 @@ export default class Photos extends React.Component {
 
     this.state = {
       photoList: [],
+      currentPhotos: [],
+      prevPhotos: [],
+      nextPhotos: [],
       mainPhoto: '',
       activeThumb: '',
       portalOn: false,
@@ -53,6 +56,8 @@ export default class Photos extends React.Component {
     this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
     this.handlePortalCreate = this.handlePortalCreate.bind(this);
     this.handlePortalClose = this.handlePortalClose.bind(this);
+    this.handleNextClick = this.handleNextClick.bind(this);
+    this.handlePrevClick = this.handlePrevClick.bind(this);
   }
 
   componentDidMount() {
@@ -69,12 +74,19 @@ export default class Photos extends React.Component {
           throw Error(response.data.error);
         }
         // add images in response data to array and set state
-        const imgArray = response.data.image_urls.slice();
+        const photoList = response.data.image_urls.slice();
+        const currentPhotos = photoList.slice(0, 6);
+        const nextPhotos = photoList.slice(6);
+
+        console.log('currentphotos', currentPhotos);
+        console.log('nextphotos', nextPhotos);
 
         this.setState({
-          photoList: imgArray,
-          mainPhoto: imgArray[0],
-          activeThumb: imgArray[0],
+          photoList,
+          currentPhotos,
+          nextPhotos,
+          mainPhoto: photoList[0],
+          activeThumb: photoList[0],
         });
       })
       // eslint-disable-next-line no-console
@@ -87,6 +99,53 @@ export default class Photos extends React.Component {
       mainPhoto: updatedImg,
       activeThumb: updatedImg,
     });
+  }
+
+  handlePrevClick() {
+
+    let { prevPhotos, currentPhotos, photoList , nextPhotos} = this.state;
+
+    //check to see if at the beginning of photo list
+    const firstPhotoIndex = photoList.indexOf(currentPhotos[0]);
+
+    if (firstPhotoIndex !== 0) {
+      //not at the beginning, so backtrack
+      nextPhotos = currentPhotos.slice();
+    currentPhotos = prevPhotos.slice();
+      prevPhotos = photoList.slice(firstPhotoIndex - 7, firstPhotoIndex - 1);
+
+      this.setState({
+        prevPhotos,
+        currentPhotos,
+        nextPhotos,
+      });
+    }
+
+  }
+
+  handleNextClick() {
+    // set prev photos to current photos
+    //get index of photolist of last current photo
+    //set new current to i + indexof
+
+
+    let { prevPhotos, currentPhotos, photoList , nextPhotos} = this.state;
+
+    const lastPhotoIndex = photoList.indexOf(currentPhotos[currentPhotos.length - 1]);
+    // check if at end of photoList
+
+    if (photoList.length - 1 > lastPhotoIndex) {
+      //still more photos
+      prevPhotos = currentPhotos.slice();
+      currentPhotos = nextPhotos.slice(0, 6);
+      nextPhotos = photoList.slice(lastPhotoIndex + 1, lastPhotoIndex + 7);
+      this.setState({
+        prevPhotos,
+        currentPhotos,
+        nextPhotos,
+      });
+
+    }
   }
 
   handlePortalCreate() {
@@ -104,6 +163,8 @@ export default class Photos extends React.Component {
   render() {
     const {
       photoList,
+      currentPhotos,
+      nextPhotos,
       mainPhoto,
       activeThumb,
       portalOn,
@@ -111,9 +172,10 @@ export default class Photos extends React.Component {
     return (
       <div>
         <Container>
-          <Prev />
+          <Prev
+          handleClick={this.handlePrevClick}/>
           <PhotoList
-            photos={photoList}
+            photos={currentPhotos}
             activeThumb={activeThumb}
             onMouseOver={this.handleThumbnailMouseOver}
           />
@@ -125,7 +187,10 @@ export default class Photos extends React.Component {
             />
           </MainPhotoWrapper>
           <Zoom />
-          <Next />
+          <Next
+          nextPhotos={nextPhotos.length}
+          handleClick={this.handleNextClick}
+          />
         </Container>
         {
           // eslint-disable-next-line operator-linebreak
