@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 // define db connection, schema and model
-mongoose.connect('mongodb://localhost/FEC', { useNewUrlParser: true }, (error) => {
+// mongodb://localhost/FEC'
+mongoose.connect('mongodb://mongo-db/FEC', { useNewUrlParser: true }, (error) => {
   if (error) {
     // eslint-disable-next-line no-console
     console.log('connection error', error);
