@@ -1,7 +1,5 @@
 FROM node:12-alpine
 
-#COPY ~/Users/dom/.aws/credentials /root/.aws/credentials
-
 WORKDIR /usr/src/app
 
 COPY package.json ./

@@ -9,7 +9,8 @@ import Zoom from './Zoom';
 import MainPhotoPortalWrapper from './MainPhotoPortalWrapper';
 import MainPhotoPortal from './MainPhotoPortal';
 
-const SERVER_URL = 'http://localhost:3004';
+// const SERVER_URL = 'http://localhost:3004';
+const SERVER_URL = 'http://ec2-13-57-207-233.us-west-1.compute.amazonaws.com:3004';
 
 const Container = styled.div`
   margin: 25px;
