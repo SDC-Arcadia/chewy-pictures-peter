@@ -8,6 +8,8 @@ import Next from './Next';
 import Zoom from './Zoom';
 import MainPhotoPortalWrapper from './MainPhotoPortalWrapper';
 import MainPhotoPortal from './MainPhotoPortal';
+import ZoomPortalWrapper from './ZoomPortalWrapper';
+import ZoomPortal from './ZoomPortal';
 
 // const SERVER_URL = 'http://localhost:3004';
 const SERVER_URL = 'http://ec2-13-57-207-233.us-west-1.compute.amazonaws.com:3004';
@@ -15,7 +17,7 @@ const SERVER_URL = 'http://ec2-13-57-207-233.us-west-1.compute.amazonaws.com:300
 const Container = styled.div`
   margin: 25px;
   display: grid;
-
+  width: 650px;
   grid-template-rows: min-content min-content min-content;
   grid-template-columns: min-content min-content;
   grid-template-areas: "prev main"
@@ -52,6 +54,7 @@ export default class Photos extends React.Component {
       mainPhoto: '',
       activeThumb: '',
       portalOn: false,
+      zoomBackgroundPosition: '0% 0%',
     };
 
     this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
@@ -59,6 +62,7 @@ export default class Photos extends React.Component {
     this.handlePortalClose = this.handlePortalClose.bind(this);
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handlePrevClick = this.handlePrevClick.bind(this);
+    this.handleMainPhotoMouseMove = this.handleMainPhotoMouseMove.bind(this);
   }
 
   componentDidMount() {
@@ -79,8 +83,8 @@ export default class Photos extends React.Component {
         const currentPhotos = photoList.slice(0, 6);
         const nextPhotos = photoList.slice(6);
 
-        console.log('currentphotos', currentPhotos);
-        console.log('nextphotos', nextPhotos);
+        // console.log('currentphotos', currentPhotos);
+        // console.log('nextphotos', nextPhotos);
 
         this.setState({
           photoList,
@@ -126,8 +130,8 @@ export default class Photos extends React.Component {
 
   handleNextClick() {
     // set prev photos to current photos
-    //get index of photolist of last current photo
-    //set new current to i + indexof
+    // get index of photolist of last current photo
+    // set new current to i + indexof
 
 
     let { prevPhotos, currentPhotos, photoList , nextPhotos} = this.state;
@@ -161,6 +165,21 @@ export default class Photos extends React.Component {
     });
   }
 
+  handleMainPhotoMouseMove(e) {
+   // console.log(e.target.getBoundingClientRect());
+    // get main photo screen coordinates and width/height
+    const { left, top, width, height } = e.target.getBoundingClientRect();
+
+    // calculate new backgroundPosition based on mouse coordinates
+    const xPosition = (e.pageX - left) / width * 100;
+    const yPosition = (e.pageY - top) / height * 100;
+    // console.log(e.pageX, e.pageY);
+
+    this.setState({
+      zoomBackgroundPosition: `${xPosition}% ${yPosition}%`,
+    })
+  }
+
   render() {
     const {
       photoList,
@@ -169,6 +188,7 @@ export default class Photos extends React.Component {
       mainPhoto,
       activeThumb,
       portalOn,
+      zoomBackgroundPosition,
     } = this.state;
     return (
       <div>
@@ -185,6 +205,7 @@ export default class Photos extends React.Component {
             <MainPhoto
               photo={mainPhoto}
               onClick={this.handlePortalCreate}
+              onMove={this.handleMainPhotoMouseMove}
             />
           </MainPhotoWrapper>
           <Zoom />
@@ -205,6 +226,12 @@ export default class Photos extends React.Component {
             </MainPhotoPortalWrapper>
           )
         }
+        <ZoomPortalWrapper>
+          <ZoomPortal
+            photo={mainPhoto}
+            backgroundPosition={zoomBackgroundPosition}
+          />
+        </ZoomPortalWrapper>
       </div>
     );
   }
