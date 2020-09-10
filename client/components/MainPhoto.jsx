@@ -4,8 +4,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MainPhoto = ({ photo, onClick, onMove }) => (
-  <div onClick={onClick} onMouseMove={onMove}>
+const MainPhoto = ({ photo, onClick, onMove, onEnter, onLeave }) => (
+  <div
+    onClick={onClick}
+    onMouseMove={onMove}
+    onMouseEnter={onEnter}
+    onMouseLeave={onLeave}
+  >
     <img src={photo} alt="pet" />
   </div>
 );

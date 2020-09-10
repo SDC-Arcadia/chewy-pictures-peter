@@ -18,9 +18,8 @@ class ZoomPortalWrapper extends React.Component {
   }
 
   render() {
-    return ReactDOM.createPortal(this.props.children, this.element)
+    return ReactDOM.createPortal(this.props.children, this.element);
   }
-
 }
 
 export default ZoomPortalWrapper;

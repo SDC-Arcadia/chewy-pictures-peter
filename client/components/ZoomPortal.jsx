@@ -16,19 +16,21 @@ const ZoomedDiv = styled.div`
   height: 600px;
 `;
 
-const testPhoto = 'https://images.unsplash.com/photo-1444065381814-865dc9da92c0';
-
-const ZoomPortal = ({ photo, backgroundPosition }) => {
+const ZoomPortal = ({
+  photo, backgroundPosition
+}) => {
   console.log('background position', backgroundPosition);
   return (
 
-    <ZoomedDiv backgroundPosition={backgroundPosition} photo={photo} />
+    <ZoomedDiv
+      backgroundPosition={backgroundPosition}
+      photo={photo}
+    />
 
-    // <ZoomedDiv backgroundPosition={backgroundPosition} >
-    // <ZoomedImg  src={photo} alt="zoomed-photo" />
-    // </ZoomedDiv>
+  // <ZoomedDiv backgroundPosition={backgroundPosition} >
+  // <ZoomedImg  src={photo} alt="zoomed-photo" />
+  // </ZoomedDiv>
   );
-
-}
+};
 
 export default ZoomPortal;
