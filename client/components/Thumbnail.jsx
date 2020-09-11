@@ -17,16 +17,13 @@ const Thumb = styled.img`
   border: ${(props) => props.active ? '2px solid orange' : '1px solid #ddd'};
 `;
 
-const Thumbnail = ({ photo, activeThumb, onMouseOver }) => {
-  if (photo === activeThumb) {
-    return (
-      <Thumb active src={photo} onMouseEnter={onMouseOver} />
-    );
-  }
-  return (
-    <Thumb src={photo} onMouseEnter={onMouseOver} />
-  );
-};
+const Thumbnail = ({ photo, activeThumb, onMouseOver }) => (
+  <Thumb
+    active={photo === activeThumb}
+    src={photo}
+    onMouseEnter={onMouseOver}
+  />
+);
 
 export default Thumbnail;
 

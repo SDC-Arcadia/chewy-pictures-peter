@@ -17,20 +17,14 @@ const ZoomedDiv = styled.div`
 `;
 
 const ZoomPortal = ({
-  photo, backgroundPosition
-}) => {
-  console.log('background position', backgroundPosition);
-  return (
+  photo, backgroundPosition,
+}) => (
 
-    <ZoomedDiv
-      backgroundPosition={backgroundPosition}
-      photo={photo}
-    />
+  <ZoomedDiv
+    backgroundPosition={backgroundPosition}
+    photo={photo}
+  />
 
-  // <ZoomedDiv backgroundPosition={backgroundPosition} >
-  // <ZoomedImg  src={photo} alt="zoomed-photo" />
-  // </ZoomedDiv>
-  );
-};
+);
 
 export default ZoomPortal;

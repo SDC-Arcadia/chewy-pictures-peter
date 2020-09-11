@@ -3,16 +3,27 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const MainPhotoWrapper = styled.div`
+  grid-area: main;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 400px;
+  width: 440px;
+`;
 
 const MainPhoto = ({ photo, onClick, onMove, onEnter, onLeave }) => (
-  <div
+  <MainPhotoWrapper
     onClick={onClick}
     onMouseMove={onMove}
     onMouseEnter={onEnter}
     onMouseLeave={onLeave}
   >
     <img src={photo} alt="pet" />
-  </div>
+  </MainPhotoWrapper>
 );
 
 export default MainPhoto;
