@@ -10,6 +10,8 @@ import MainPhotoPortalWrapper from './MainPhotoPortalWrapper';
 import MainPhotoPortal from './MainPhotoPortal';
 import ZoomPortalWrapper from './ZoomPortalWrapper';
 import ZoomPortal from './ZoomPortal';
+// import HoverPortalWrapper from './HoverPortalWrapper';
+// import HoverPortal from './HoverPortal';
 
 // const SERVER_URL = 'http://localhost:3004';
 const SERVER_URL = 'http://ec2-13-57-207-233.us-west-1.compute.amazonaws.com:3004';
@@ -33,7 +35,7 @@ const Container = styled.div`
 
   }
   grid-gap: 10px;
-  border: 5px solid blue;
+  ${'' /* border: 5px solid blue; */}
 `;
 
 export default class Photos extends React.Component {
@@ -49,7 +51,10 @@ export default class Photos extends React.Component {
       activeThumb: '',
       portalOn: false,
       zoomOn: false,
+      hoverOn: false,
       zoomBackgroundPosition: '0% 0%',
+      hoverX: '0',
+      hoverY: '0',
     };
 
     this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
@@ -172,22 +177,29 @@ export default class Photos extends React.Component {
     // calculate new backgroundPosition based on mouse coordinates
     const xPosition = (e.pageX - left) / width * 100;
     const yPosition = (e.pageY - top) / height * 100;
-    // console.log(e.pageX, e.pageY);
 
+    const hoverX = e.clientX - left;
+    const hoverY = e.clientY - top;
+    // console.log(e.pageX, e.pageY);
+    console.log(e.clientX - left, e.clientY - top);
     this.setState({
       zoomBackgroundPosition: `${xPosition}% ${yPosition}%`,
+      hoverX,
+      hoverY,
     });
   }
 
   handleMainPhotoMouseEnter() {
     this.setState({
       zoomOn: true,
+
     });
   }
 
   handleMainPhotoMouseLeave() {
     this.setState({
       zoomOn: false,
+
     });
   }
 
@@ -227,6 +239,8 @@ export default class Photos extends React.Component {
       portalOn,
       zoomOn,
       zoomBackgroundPosition,
+      hoverX,
+      hoverY,
     } = this.state;
     return (
       <div>
@@ -242,6 +256,8 @@ export default class Photos extends React.Component {
           />
           <MainPhoto
             photo={mainPhoto}
+            hoverX={hoverX}
+            hoverY={hoverY}
             onClick={this.handlePortalCreate}
             onMove={this.handleMainPhotoMouseMove}
             onEnter={this.handleMainPhotoMouseEnter}
@@ -278,6 +294,7 @@ export default class Photos extends React.Component {
             </ZoomPortalWrapper>
           )
         }
+
 
       </div>
     );
