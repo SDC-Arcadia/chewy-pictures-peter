@@ -1,7 +1,5 @@
 FROM node:12-alpine
 
-# set environmental variable to 80?
-
 WORKDIR /usr/src/app
 
 ENV PORT=80

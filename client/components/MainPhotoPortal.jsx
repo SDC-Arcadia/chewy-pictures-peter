@@ -10,60 +10,81 @@ const PortalStyle = styled.div`
   top: 0;
   left: 0;
   display: grid;
-  grid-template-rows: min-content auto min-content;
-  grid-template-columns: min-content auto min-content;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-columns: 1fr auto 1fr;
   grid-template-areas: "close close close"
                        "prev main next"
                        "desc desc desc";
-  align-items: center;
+  align-content: center;
   justify-content: center;
   z-index: 999;
 `;
 
 const ImageStyle = styled.img`
   grid-area: main;
-  width: 600px
+  ${'' /* max-width: 650px; */}
+  width: 50vw;
+  height: auto;
 `;
 
-const ZoomedPrevStyle = styled.button`
+const ZoomedPrevDiv = styled.div`
   grid-area: prev;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+const ZoomedPrevStyle = styled.div`
   width: 58px;
   height: 58px;
   background: url('https://rpt22-fec-kwame.s3-us-west-1.amazonaws.com/images/static/arrow-left-white.svg') no-repeat;
   background-color: transparent;
-  background-size: 15px 26px;
-  justify-self: start;
-  border: none;
+  background-position: right center;
+
 `;
 
-const ZoomedNextStyle = styled.button`
+const ZoomedNextDiv = styled.div`
   grid-area: next;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const ZoomedNextStyle = styled.div`
   width: 58px;
   height: 58px;
   background: url('https://rpt22-fec-kwame.s3-us-west-1.amazonaws.com/images/static/arrow-right-white.svg') no-repeat;
   background-color: transparent;
-  background-size: 15px 26px;
-  justify-self: end;
-  border: none;
+  background-position: left center;
+  z-index: 1000;
 `;
 
-const ZoomedCloseStyle = styled.button`
+const ZoomedCloseStyle = styled.div`
   grid-area: close;
   width: 58px;
   height: 58px;
   background: url('https://rpt22-fec-kwame.s3-us-west-1.amazonaws.com/images/static/icon-close-white.svg') no-repeat;
   background-color: transparent;
-  background-size: 15px 26px;
+  background-position-y: bottom;
+  background-size: 50%;
   justify-self: end;
-  border: none;
 `;
 
-const MainPhotoPortal = ({ photo, onClick }) => (
-  <PortalStyle onClick={onClick}>
-    <ZoomedPrevStyle />
-    <ImageStyle src={photo} alt="zoomed-pet" />
-    <ZoomedNextStyle />
-    <ZoomedCloseStyle />
+const MainPhotoPortal = ({
+  photo,
+  onClick,
+  nextClick,
+  prevClick,
+}) => (
+  <PortalStyle>
+    <ZoomedPrevDiv>
+      <ZoomedPrevStyle onClick={prevClick} />
+    </ZoomedPrevDiv>
+    <ImageStyle onClick={onClick} src={photo} alt="zoomed-pet" />
+    <ZoomedNextDiv>
+      <ZoomedNextStyle onClick={nextClick} />
+    </ZoomedNextDiv>
+    <ZoomedCloseStyle onClick={onClick} />
   </PortalStyle>
 );
 
@@ -72,4 +93,6 @@ export default MainPhotoPortal;
 MainPhotoPortal.propTypes = {
   photo: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  nextClick: PropTypes.func.isRequired,
+  prevClick: PropTypes.func.isRequired,
 };

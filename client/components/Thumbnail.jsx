@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -13,20 +14,16 @@ const Thumb = styled.img`
   text-align: center;
   padding: 1px 17px 1px 17px;
   margin: 0 4px 6px 0;
-  ${'' /* eslint-disable-next-line no-confusing-arrow */}
   border: ${(props) => props.active ? '2px solid orange' : '1px solid #ddd'};
 `;
 
-const Thumbnail = ({ photo, activeThumb, onMouseOver }) => {
-  if (photo === activeThumb) {
-    return (
-      <Thumb active src={photo} onMouseEnter={onMouseOver} />
-    );
-  }
-  return (
-    <Thumb src={photo} onMouseEnter={onMouseOver} />
-  );
-};
+const Thumbnail = ({ photo, activeThumb, onMouseOver }) => (
+  <Thumb
+    active={photo === activeThumb}
+    src={photo}
+    onMouseEnter={onMouseOver}
+  />
+);
 
 export default Thumbnail;
 

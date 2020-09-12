@@ -3,20 +3,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-const portalRoot = document.getElementById('portal-root');
+const zoomPortalRoot = document.getElementById('zoom-portal-root');
 
-class MainPhotoPortalWrapper extends React.Component {
+class ZoomPortalWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.element = document.createElement('div');
   }
 
   componentDidMount() {
-    portalRoot.appendChild(this.element);
+    zoomPortalRoot.appendChild(this.element);
   }
 
   componentWillUnmount() {
-    portalRoot.removeChild(this.element);
+    zoomPortalRoot.removeChild(this.element);
   }
 
   render() {
@@ -25,8 +25,8 @@ class MainPhotoPortalWrapper extends React.Component {
   }
 }
 
-export default MainPhotoPortalWrapper;
+export default ZoomPortalWrapper;
 
-MainPhotoPortalWrapper.propTypes = {
+ZoomPortalWrapper.propTypes = {
   children: PropTypes.element.isRequired,
 };

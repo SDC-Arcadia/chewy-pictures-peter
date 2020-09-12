@@ -6,16 +6,13 @@ import MainPhoto from './MainPhoto';
 import Prev from './Prev';
 import Next from './Next';
 import Zoom from './Zoom';
-import MainPhotoPortalWrapper from './MainPhotoPortalWrapper';
-import MainPhotoPortal from './MainPhotoPortal';
 
-// const SERVER_URL = 'http://localhost:3004';
 const SERVER_URL = 'http://ec2-13-57-207-233.us-west-1.compute.amazonaws.com:3004';
 
 const Container = styled.div`
   margin: 25px;
   display: grid;
-
+  width: 650px;
   grid-template-rows: min-content min-content min-content;
   grid-template-columns: min-content min-content;
   grid-template-areas: "prev main"
@@ -28,16 +25,10 @@ const Container = styled.div`
     grid-template-areas: "main main main"
                          "zoom zoom zoom"
                          "prev thumbs next";
+
   }
   grid-gap: 10px;
-  border: 5px solid blue;
-`;
-
-const MainPhotoWrapper = styled.div`
-  grid-area: main;
-  box-sizing: border-box;
-  height: 400px;
-  width: 440px;
+  ${'' /* border: 5px solid blue; */}
 `;
 
 export default class Photos extends React.Component {
@@ -51,20 +42,16 @@ export default class Photos extends React.Component {
       nextPhotos: [],
       mainPhoto: '',
       activeThumb: '',
-      portalOn: false,
     };
 
     this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
-    this.handlePortalCreate = this.handlePortalCreate.bind(this);
-    this.handlePortalClose = this.handlePortalClose.bind(this);
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handlePrevClick = this.handlePrevClick.bind(this);
+    this.handleZoomPrevClick = this.handleZoomPrevClick.bind(this);
+    this.handleZoomNextClick = this.handleZoomNextClick.bind(this);
   }
 
   componentDidMount() {
-    // initial product was passed as props.product
-    // fetch photos for that product and update state
-
     // eslint-disable-next-line no-undef
     const parsedUrl = new URL(window.location.href);
     const productId = parsedUrl.searchParams.get('productId');
@@ -78,9 +65,6 @@ export default class Photos extends React.Component {
         const photoList = response.data.image_urls.slice();
         const currentPhotos = photoList.slice(0, 6);
         const nextPhotos = photoList.slice(6);
-
-        console.log('currentphotos', currentPhotos);
-        console.log('nextphotos', nextPhotos);
 
         this.setState({
           photoList,
@@ -103,16 +87,19 @@ export default class Photos extends React.Component {
   }
 
   handlePrevClick() {
+    let {
+      prevPhotos, currentPhotos, nextPhotos,
+    } = this.state;
 
-    let { prevPhotos, currentPhotos, photoList , nextPhotos} = this.state;
+    const { photoList } = this.state;
 
-    //check to see if at the beginning of photo list
+    // check to see if at the beginning of photo list
     const firstPhotoIndex = photoList.indexOf(currentPhotos[0]);
 
     if (firstPhotoIndex !== 0) {
-      //not at the beginning, so backtrack
+      // not at the beginning, so backtrack
       nextPhotos = currentPhotos.slice();
-    currentPhotos = prevPhotos.slice();
+      currentPhotos = prevPhotos.slice();
       prevPhotos = photoList.slice(firstPhotoIndex - 7, firstPhotoIndex - 1);
 
       this.setState({
@@ -121,91 +108,90 @@ export default class Photos extends React.Component {
         nextPhotos,
       });
     }
-
   }
 
   handleNextClick() {
-    // set prev photos to current photos
-    //get index of photolist of last current photo
-    //set new current to i + indexof
+    let {
+      prevPhotos, currentPhotos, nextPhotos,
+    } = this.state;
 
-
-    let { prevPhotos, currentPhotos, photoList , nextPhotos} = this.state;
+    const { photoList } = this.state;
 
     const lastPhotoIndex = photoList.indexOf(currentPhotos[currentPhotos.length - 1]);
     // check if at end of photoList
 
     if (photoList.length - 1 > lastPhotoIndex) {
-      //still more photos
+      // still more photos
       prevPhotos = currentPhotos.slice();
       currentPhotos = nextPhotos.slice(0, 6);
-      nextPhotos = photoList.slice(lastPhotoIndex + 1, lastPhotoIndex + 7);
+
+      const nextPhotoIndex = photoList.indexOf(currentPhotos[currentPhotos.length - 1]);
+      nextPhotos = photoList.slice(nextPhotoIndex + 1, nextPhotoIndex + 7);
       this.setState({
         prevPhotos,
         currentPhotos,
         nextPhotos,
       });
-
     }
   }
 
-  handlePortalCreate() {
+  handleZoomPrevClick() {
+    // find index of current activeThumb
+    const { activeThumb, photoList } = this.state;
+
+    const currentThumbIndex = (photoList.indexOf(activeThumb) - 1
+      + photoList.length) % photoList.length;
+    // set new active thumb to 1 less of index, utilize circular array
     this.setState({
-      portalOn: true,
+      activeThumb: photoList[currentThumbIndex],
+      mainPhoto: photoList[currentThumbIndex],
     });
   }
 
-  handlePortalClose() {
+  handleZoomNextClick() {
+    // find index of current activeThumb
+    const { activeThumb, photoList } = this.state;
+
+    const currentThumbIndex = (photoList.indexOf(activeThumb) + 1) % photoList.length;
+    // set new active thumb to 1 less of index, utilize circular array
     this.setState({
-      portalOn: false,
+      activeThumb: photoList[currentThumbIndex],
+      mainPhoto: photoList[currentThumbIndex],
     });
   }
 
   render() {
     const {
-      photoList,
       currentPhotos,
       nextPhotos,
+      prevPhotos,
       mainPhoto,
       activeThumb,
-      portalOn,
     } = this.state;
     return (
-      <div>
+      <>
         <Container>
           <Prev
-          handleClick={this.handlePrevClick}/>
+            handleClick={this.handlePrevClick}
+            photos={prevPhotos.length}
+          />
           <PhotoList
             photos={currentPhotos}
             activeThumb={activeThumb}
             onMouseOver={this.handleThumbnailMouseOver}
           />
-
-          <MainPhotoWrapper>
-            <MainPhoto
-              photo={mainPhoto}
-              onClick={this.handlePortalCreate}
-            />
-          </MainPhotoWrapper>
+          <MainPhoto
+            photo={mainPhoto}
+            nextClick={this.handleZoomNextClick}
+            prevClick={this.handleZoomPrevClick}
+          />
           <Zoom />
           <Next
-          nextPhotos={nextPhotos.length}
-          handleClick={this.handleNextClick}
+            nextPhotos={nextPhotos.length}
+            handleClick={this.handleNextClick}
           />
         </Container>
-        {
-          // eslint-disable-next-line operator-linebreak
-          portalOn &&
-          (
-            <MainPhotoPortalWrapper>
-              <MainPhotoPortal
-                onClick={this.handlePortalClose}
-                photo={mainPhoto}
-              />
-            </MainPhotoPortalWrapper>
-          )
-        }
-      </div>
+      </>
     );
   }
 }
