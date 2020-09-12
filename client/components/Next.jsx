@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -32,6 +33,7 @@ const Next = ({ nextPhotos, handleClick }) => (
 
 export default Next;
 
-Next.PropTypes = {
+Next.propTypes = {
   nextPhotos: PropTypes.number.isRequired,
-}
+  handleClick: PropTypes.func.isRequired,
+};

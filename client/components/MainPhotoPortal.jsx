@@ -70,7 +70,12 @@ const ZoomedCloseStyle = styled.div`
   justify-self: end;
 `;
 
-const MainPhotoPortal = ({ photo, onClick, nextClick, prevClick }) => (
+const MainPhotoPortal = ({
+  photo,
+  onClick,
+  nextClick,
+  prevClick,
+}) => (
   <PortalStyle>
     <ZoomedPrevDiv>
       <ZoomedPrevStyle onClick={prevClick} />
@@ -88,4 +93,6 @@ export default MainPhotoPortal;
 MainPhotoPortal.propTypes = {
   photo: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  nextClick: PropTypes.func.isRequired,
+  prevClick: PropTypes.func.isRequired,
 };

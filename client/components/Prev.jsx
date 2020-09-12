@@ -1,5 +1,7 @@
+/* eslint-disable no-confusing-arrow */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const greyPrevArrowTop = 'https://rpt22-fec-kwame.s3-us-west-1.amazonaws.com/images/static/arrow-top-ddd-grey.svg';
 const bluePrevArrowTop = 'https://rpt22-fec-kwame.s3-us-west-1.amazonaws.com/images/static/arrow-top-blue.svg';
@@ -30,3 +32,8 @@ const Prev = ({ photos, handleClick }) => (
 );
 
 export default Prev;
+
+Prev.propTypes = {
+  photos: PropTypes.number.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};

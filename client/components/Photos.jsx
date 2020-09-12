@@ -6,14 +6,7 @@ import MainPhoto from './MainPhoto';
 import Prev from './Prev';
 import Next from './Next';
 import Zoom from './Zoom';
-import MainPhotoPortalWrapper from './MainPhotoPortalWrapper';
-import MainPhotoPortal from './MainPhotoPortal';
-import ZoomPortalWrapper from './ZoomPortalWrapper';
-import ZoomPortal from './ZoomPortal';
-// import HoverPortalWrapper from './HoverPortalWrapper';
-// import HoverPortal from './HoverPortal';
 
-// const SERVER_URL = 'http://localhost:3004';
 const SERVER_URL = 'http://ec2-13-57-207-233.us-west-1.compute.amazonaws.com:3004';
 
 const Container = styled.div`
@@ -49,22 +42,11 @@ export default class Photos extends React.Component {
       nextPhotos: [],
       mainPhoto: '',
       activeThumb: '',
-      portalOn: false,
-      zoomOn: false,
-      hoverOn: false,
-      zoomBackgroundPosition: '0% 0%',
-      hoverX: '0',
-      hoverY: '0',
     };
 
     this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
-    this.handlePortalCreate = this.handlePortalCreate.bind(this);
-    this.handlePortalClose = this.handlePortalClose.bind(this);
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handlePrevClick = this.handlePrevClick.bind(this);
-    this.handleMainPhotoMouseMove = this.handleMainPhotoMouseMove.bind(this);
-    this.handleMainPhotoMouseEnter = this.handleMainPhotoMouseEnter.bind(this);
-    this.handleMainPhotoMouseLeave = this.handleMainPhotoMouseLeave.bind(this);
     this.handleZoomPrevClick = this.handleZoomPrevClick.bind(this);
     this.handleZoomNextClick = this.handleZoomNextClick.bind(this);
   }
@@ -106,8 +88,10 @@ export default class Photos extends React.Component {
 
   handlePrevClick() {
     let {
-      prevPhotos, currentPhotos, photoList, nextPhotos,
+      prevPhotos, currentPhotos, nextPhotos,
     } = this.state;
+
+    const { photoList } = this.state;
 
     // check to see if at the beginning of photo list
     const firstPhotoIndex = photoList.indexOf(currentPhotos[0]);
@@ -127,10 +111,6 @@ export default class Photos extends React.Component {
   }
 
   handleNextClick() {
-    // set prev photos to current photos
-    // get index of photolist of last current photo
-    // set new current to i + indexof
-
     let {
       prevPhotos, currentPhotos, nextPhotos,
     } = this.state;
@@ -153,54 +133,6 @@ export default class Photos extends React.Component {
         nextPhotos,
       });
     }
-  }
-
-  handlePortalCreate() {
-    this.setState({
-      portalOn: true,
-    });
-  }
-
-  handlePortalClose() {
-    this.setState({
-      portalOn: false,
-    });
-  }
-
-  handleMainPhotoMouseMove(e) {
-    // console.log(e.target.getBoundingClientRect());
-    // get main photo screen coordinates and width/height
-    const {
-      left, top, width, height,
-    } = e.target.getBoundingClientRect();
-
-    // calculate new backgroundPosition based on mouse coordinates
-    const xPosition = (e.pageX - left) / width * 100;
-    const yPosition = (e.pageY - top) / height * 100;
-
-    const hoverX = e.clientX - left;
-    const hoverY = e.clientY - top;
-    // console.log(e.pageX, e.pageY);
-    console.log(e.clientX - left, e.clientY - top);
-    this.setState({
-      zoomBackgroundPosition: `${xPosition}% ${yPosition}%`,
-      hoverX,
-      hoverY,
-    });
-  }
-
-  handleMainPhotoMouseEnter() {
-    this.setState({
-      zoomOn: true,
-
-    });
-  }
-
-  handleMainPhotoMouseLeave() {
-    this.setState({
-      zoomOn: false,
-
-    });
   }
 
   handleZoomPrevClick() {
@@ -230,20 +162,14 @@ export default class Photos extends React.Component {
 
   render() {
     const {
-      photoList,
       currentPhotos,
       nextPhotos,
       prevPhotos,
       mainPhoto,
       activeThumb,
-      portalOn,
-      zoomOn,
-      zoomBackgroundPosition,
-      hoverX,
-      hoverY,
     } = this.state;
     return (
-      <div>
+      <>
         <Container>
           <Prev
             handleClick={this.handlePrevClick}
@@ -256,12 +182,8 @@ export default class Photos extends React.Component {
           />
           <MainPhoto
             photo={mainPhoto}
-            hoverX={hoverX}
-            hoverY={hoverY}
-            onClick={this.handlePortalCreate}
-            onMove={this.handleMainPhotoMouseMove}
-            onEnter={this.handleMainPhotoMouseEnter}
-            onLeave={this.handleMainPhotoMouseLeave}
+            nextClick={this.handleZoomNextClick}
+            prevClick={this.handleZoomPrevClick}
           />
           <Zoom />
           <Next
@@ -269,34 +191,7 @@ export default class Photos extends React.Component {
             handleClick={this.handleNextClick}
           />
         </Container>
-        {
-          // eslint-disable-next-line operator-linebreak
-          portalOn &&
-          (
-            <MainPhotoPortalWrapper>
-              <MainPhotoPortal
-                onClick={this.handlePortalClose}
-                photo={mainPhoto}
-                nextClick={this.handleZoomNextClick}
-                prevClick={this.handleZoomPrevClick}
-              />
-            </MainPhotoPortalWrapper>
-          )
-        }
-        {
-          zoomOn
-          && (
-            <ZoomPortalWrapper>
-              <ZoomPortal
-                photo={mainPhoto}
-                backgroundPosition={zoomBackgroundPosition}
-              />
-            </ZoomPortalWrapper>
-          )
-        }
-
-
-      </div>
+      </>
     );
   }
 }
