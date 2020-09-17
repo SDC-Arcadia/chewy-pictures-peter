@@ -4,33 +4,12 @@ import styled from 'styled-components';
 import Thumbnail from './Thumbnail';
 
 const ThumbnailListWrapper = styled.div`
-  ${'' /* display: inline-block;
-  border: 5px solid blue; */}
   grid-area: thumbs;
   display: flex;
   height: ${(props) => props.height};
   flex-direction: ${(props) => props.thumbDirection};
   width: 100%;
-  border: 5px dotted red;
-  overflow: hidden;
-    white-space: nowrap;
-    position: relative;
-
-  ${'' /* @media screen and (max-width: 650px) {
-    flex-direction: row;
-    min-width: 0;
-    width: 100%;
-    height: 70px; */}
-
-
-  }
 `;
-
-// const ThumbnailViewport = styled.div`
-//     display: flex;
-//     grid-area: thumbs;
-//     position: relative;
-// `;
 
 const PhotoList = ({
   photos, activeThumb, thumbDirection, onMouseOver,
@@ -38,8 +17,6 @@ const PhotoList = ({
   const height = thumbDirection === 'column' ? '390px' : '70px';
 
   return (
-
-    // <ThumbnailViewport>
     <ThumbnailListWrapper
       thumbDirection={thumbDirection}
       height={height}
@@ -56,7 +33,6 @@ const PhotoList = ({
       ))}
 
     </ThumbnailListWrapper>
-    // </ThumbnailViewport>
   );
 };
 

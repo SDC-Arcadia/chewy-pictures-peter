@@ -14,8 +14,6 @@ const MainPhotoWrapper = styled.div`
   grid-area: main;
   display: flex;
   position: relative;
-  ${'' /* vertical-align: middle;
-  text-align: center; */}
   align-items: center;
   justify-content: center;
   align-self: center;
@@ -23,7 +21,6 @@ const MainPhotoWrapper = styled.div`
   box-sizing: border-box;
   height: 400px;
   width: 400px;
-  border: 5px solid red;
 `;
 
 class MainPhoto extends React.Component {

@@ -32,7 +32,6 @@ const Container = styled.div`
 
   }
   grid-gap: 10px;
-  border: 5px solid blue;
 `;
 
 export default class Photos extends React.Component {
@@ -47,6 +46,7 @@ export default class Photos extends React.Component {
       mainPhoto: '',
       activeThumb: '',
       displayThumbs: 6,
+      changeThumbDirection: 650,
       thumbDirection: 'column',
     };
 
@@ -66,10 +66,12 @@ export default class Photos extends React.Component {
     this.getPhotoUrl(productId);
 
     // set event handler to check for screen with
+    // eslint-disable-next-line no-undef
     window.addEventListener('resize', this.handleScreenResize);
   }
 
   componentWillUnmount() {
+    // eslint-disable-next-line no-undef
     window.removeEventListener('resize', this.handleScreenResize);
   }
 
@@ -81,25 +83,21 @@ export default class Photos extends React.Component {
         }
         // add images in response data to array and set state
         this.updatePhotoState(response.data.image_urls);
-        // const { displayThumbs } = this.state;
-        // const photoList = response.data.image_urls.slice();
-        // const currentPhotos = photoList.slice(0, displayThumbs);
-        // const nextPhotos = photoList.slice(displayThumbs);
-
-        // this.setState({
-        //   photoList,
-        //   currentPhotos,
-        //   nextPhotos,
-        //   mainPhoto: photoList[0],
-        //   activeThumb: photoList[0],
-        // });
       })
     // eslint-disable-next-line no-console
       .catch((error) => console.log('Error Fetching Product Images:', error));
   }
 
   updatePhotoState(imageUrls, displayNumber) {
-    const { displayThumbs, mainPhoto } = this.state;
+    const {
+      displayThumbs, mainPhoto, changeThumbDirection, thumbDirection,
+    } = this.state;
+    // eslint-disable-next-line no-undef
+    if (window.innerWidth < changeThumbDirection && thumbDirection === 'column') {
+      this.setState({
+        photoList: imageUrls.slice(),
+      }, this.handleScreenResize);
+    }
 
     const thumbsToRender = displayNumber || displayThumbs;
 
@@ -118,26 +116,23 @@ export default class Photos extends React.Component {
   }
 
   handleScreenResize() {
-    const { thumbDirection, photoList } = this.state;
+    const { thumbDirection, photoList, changeThumbDirection } = this.state;
+    // eslint-disable-next-line no-undef
     const windowWidth = window.innerWidth;
-
+    const numThumbs = Math.floor((windowWidth - 150) / 74);
     if (thumbDirection === 'row') {
       // calculate how many thumbs to render
-      if (windowWidth > 650) {
+      if (windowWidth > changeThumbDirection) {
         this.setState({
           thumbDirection: 'column',
         }, this.updatePhotoState(photoList, 6));
       } else {
-        const numThumbs = Math.floor((windowWidth - 150) / 74);
-        // this.setState({
-        //   displayThumbs: numThumbs,
-        // });
         this.updatePhotoState(photoList, (numThumbs > 5 ? 5 : numThumbs));
       }
-    } else if (windowWidth < 650) {
+    } else if (windowWidth < changeThumbDirection) {
       this.setState({
         thumbDirection: 'row',
-      });
+      }, this.updatePhotoState(photoList, numThumbs));
     }
   }
 
@@ -238,6 +233,7 @@ export default class Photos extends React.Component {
           <Prev
             handleClick={this.handlePrevClick}
             photos={prevPhotos.length}
+            thumbDirection={thumbDirection}
           />
           <PhotoList
             photos={currentPhotos}
@@ -254,6 +250,7 @@ export default class Photos extends React.Component {
           <Next
             nextPhotos={nextPhotos.length}
             handleClick={this.handleNextClick}
+            thumbDirection={thumbDirection}
           />
         </Container>
       </>

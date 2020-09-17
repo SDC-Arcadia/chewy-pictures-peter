@@ -15,8 +15,6 @@ const Thumb = styled.img`
   padding: ${(props) => props.thumbPadding};
   margin: 0 4px 6px 0;
   border: ${(props) => props.active ? '2px solid orange' : '1px solid #ddd'};
-  ${'' /* overflow: hidden;
-  flex-wrap: nowrap; */}
 `;
 
 const Thumbnail = ({
