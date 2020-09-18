@@ -73,6 +73,8 @@ class MainPhoto extends React.Component {
       left, top, width, height,
     } = e.target.getBoundingClientRect();
 
+    console.log('bounding info - l, t, w, h', left, top, width, height);
+
     const hoverNode = this.mainPhotoRef.current;
     const wOffset = hoverNode.offsetWidth / 2;
     const hOffset = hoverNode.offsetHeight / 2;
@@ -87,13 +89,13 @@ class MainPhoto extends React.Component {
     let y = mouseY - hOffset;
 
     if (mouseX > width - wOffset) {
-      x = width - (2 * wOffset);
+      x = width - wOffset;
     }
     if (mouseX < wOffset) {
       x = 0;
     }
     if (mouseY > height - hOffset) {
-      y = height - (2 * hOffset);
+      y = height - 2 *hOffset;
     }
     if (mouseY < hOffset) {
       y = 0;
@@ -121,11 +123,7 @@ class MainPhoto extends React.Component {
           onMouseLeave={this.handleMainPhotoMouseLeave}
           onClick={this.handlePortalCreate}
         >
-          <img
-            src={photo}
-            onMouseMove={this.handleMainPhotoMouseMove}
-            alt=""
-          />
+
           {
             hoverOn
             && (
@@ -134,6 +132,11 @@ class MainPhoto extends React.Component {
               />
             )
           }
+          <img
+            src={photo}
+            onMouseMove={this.handleMainPhotoMouseMove}
+            alt=""
+          />
 
         </MainPhotoWrapper>
         {
