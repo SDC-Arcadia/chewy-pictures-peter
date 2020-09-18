@@ -1,12 +1,14 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const compression = require('compression');
 const { queryProduct } = require('../database/dbConnection.js');
 
 const app = express();
 const PORT = process.env.PORT || 3004;
 
 app.use(cors());
+app.use(compression());
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../public'), {
   maxAge: 5000,
