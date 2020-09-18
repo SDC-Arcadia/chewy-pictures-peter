@@ -20,7 +20,6 @@ const ZoomWrapper = styled.div`
     background-position: 0px 50%;
     background-size: 19px;
     vertical-align: -5px;
-
   }
 
 `;

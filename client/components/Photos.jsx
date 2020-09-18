@@ -7,7 +7,8 @@ import Prev from './Prev';
 import Next from './Next';
 import Zoom from './Zoom';
 
-const SERVER_URL = 'http://ec2-13-57-207-233.us-west-1.compute.amazonaws.com:3004';
+const IMAGES_URL = 'http://ec2-13-57-207-233.us-west-1.compute.amazonaws.com:3004';
+const PRODUCT_URL = 'http://3.218.98.72:3001';
 
 const Container = styled.div`
   margin: 25px;
@@ -17,20 +18,9 @@ const Container = styled.div`
   min-width: 0;
   align-items: center;
   justify-content: center;
-  grid-template-rows: min-content min-content min-content;
-  grid-template-columns: min-content min-content;
-  grid-template-areas: "prev main"
-                       "thumbs main"
-                       "next zoom";
-
-  @media screen and (max-width: 650px) {
-    grid-template-rows: min-content min-content;
-    grid-template-columns: min-content min-content min-content;
-    grid-template-areas: "main main main"
-                         "zoom zoom zoom"
-                         "prev thumbs next";
-
-  }
+  grid-template-rows: ${(props) => props.gridTemplateRows};
+  grid-template-columns: ${(props) => props.gridTemplateColumns};
+  grid-template-areas: ${(props) => props.gridTemplateAreas};
   grid-gap: 10px;
 `;
 
@@ -48,6 +38,7 @@ export default class Photos extends React.Component {
       displayThumbs: 6,
       changeThumbDirection: 650,
       thumbDirection: 'column',
+      productName: '',
     };
 
     this.handleThumbnailMouseOver = this.handleThumbnailMouseOver.bind(this);
@@ -58,13 +49,16 @@ export default class Photos extends React.Component {
     this.handleScreenResize = this.handleScreenResize.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // eslint-disable-next-line no-undef
     const parsedUrl = new URL(window.location.href);
     const productId = parsedUrl.searchParams.get('productId');
 
-    this.getPhotoUrl(productId);
+    const getImages = this.getPhotoUrl(productId);
 
+    const getProduct = this.getProductDetail(productId);
+
+    await Promise.all([getImages, getProduct]);
     // set event handler to check for screen with
     // eslint-disable-next-line no-undef
     window.addEventListener('resize', this.handleScreenResize);
@@ -75,8 +69,18 @@ export default class Photos extends React.Component {
     window.removeEventListener('resize', this.handleScreenResize);
   }
 
+  getProductDetail(productId) {
+    axios.get(`${PRODUCT_URL}/productInfo/${productId}`)
+      .then((response) => {
+        this.setState({
+          productName: response.data.name,
+        });
+      })
+      .catch((error) => console.log('error getting product detail', error));
+  }
+
   getPhotoUrl(productId) {
-    axios.get(`${SERVER_URL}/photos/${productId}`)
+    axios.get(`${IMAGES_URL}/photos/${productId}`)
       .then((response) => {
         if (response.data.error) {
           throw Error(response.data.error);
@@ -226,10 +230,23 @@ export default class Photos extends React.Component {
       mainPhoto,
       activeThumb,
       thumbDirection,
+      changeThumbDirection,
+      productName,
     } = this.state;
+
+    const fullSized = window.innerWidth > changeThumbDirection ? true : false;
+
+    const gridTemplateRows = fullSized ? 'repeat(3, min-content)' : 'repeat(2, min-content)';
+    const gridTemplateColumns = fullSized ? 'repeat(2, min-content)' : 'repeat(3, min-content)';
+    const gridTemplateAreas = fullSized ? `"prev main" "thumbs main" "next zoom"` : `"main main main" "zoom zoom zoom" "prev thumbs next"`;
+
     return (
       <>
-        <Container>
+        <Container
+          gridTemplateRows={gridTemplateRows}
+          gridTemplateColumns={gridTemplateColumns}
+          gridTemplateAreas={gridTemplateAreas}
+        >
           <Prev
             handleClick={this.handlePrevClick}
             photos={prevPhotos.length}
@@ -243,6 +260,7 @@ export default class Photos extends React.Component {
           />
           <MainPhoto
             photo={mainPhoto}
+            productName={productName}
             nextClick={this.handleZoomNextClick}
             prevClick={this.handleZoomPrevClick}
           />
