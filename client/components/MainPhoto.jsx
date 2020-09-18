@@ -16,8 +16,6 @@ const MainPhotoWrapper = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
-  align-self: center;
-  justify-self: center;
   box-sizing: border-box;
   height: 400px;
   width: 400px;
@@ -89,16 +87,16 @@ class MainPhoto extends React.Component {
     let y = mouseY - hOffset;
 
     if (mouseX > width - wOffset) {
-      x = width - wOffset;
+      x = width - (2 * wOffset) + ((400 - width) / 2);
     }
     if (mouseX < wOffset) {
-      x = 0;
+      x = ((400 - width) / 2);
     }
     if (mouseY > height - hOffset) {
-      y = height - 2 * hOffset;
+      y = height - (2 * hOffset) + ((400 - height) / 2);
     }
     if (mouseY < hOffset) {
-      y = 0;
+      y = ((400 - height) / 2);
     }
 
     hoverNode.style.left = `${x}px`;
