@@ -10,8 +10,8 @@ const PortalStyle = styled.div`
   top: 0;
   left: 0;
   display: grid;
-  grid-template-rows: 1fr auto 1fr;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 1fr 10fr 1fr;
+  grid-template-columns: 1fr 10fr 1fr;
   grid-template-areas: "close close close"
                        "prev main next"
                        "desc desc desc";
@@ -22,7 +22,9 @@ const PortalStyle = styled.div`
 
 const ImageStyle = styled.img`
   grid-area: main;
-  ${'' /* max-width: 650px; */}
+  dislay: flex;
+  justify-self: center;
+  align-self: center;
   width: 50vw;
   height: auto;
 `;
@@ -40,7 +42,6 @@ const ZoomedPrevStyle = styled.div`
   background: url('https://rpt22-fec-kwame.s3-us-west-1.amazonaws.com/images/static/arrow-left-white.svg') no-repeat;
   background-color: transparent;
   background-position: right center;
-
 `;
 
 const ZoomedNextDiv = styled.div`
@@ -70,21 +71,37 @@ const ZoomedCloseStyle = styled.div`
   justify-self: end;
 `;
 
+const ProductNameStyle = styled.div`
+  grid-area: desc;
+  color: white;
+  font-size: 1.5rem;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+`;
+
 const MainPhotoPortal = ({
   photo,
   onClick,
   nextClick,
   prevClick,
+  productName,
 }) => (
   <PortalStyle>
     <ZoomedPrevDiv>
       <ZoomedPrevStyle onClick={prevClick} />
     </ZoomedPrevDiv>
+
     <ImageStyle onClick={onClick} src={photo} alt="zoomed-pet" />
     <ZoomedNextDiv>
       <ZoomedNextStyle onClick={nextClick} />
-    </ZoomedNextDiv>
+      </ZoomedNextDiv>
+
+      <ProductNameStyle>
+      {productName}
+      </ProductNameStyle>
+
     <ZoomedCloseStyle onClick={onClick} />
+
   </PortalStyle>
 );
 
@@ -92,6 +109,7 @@ export default MainPhotoPortal;
 
 MainPhotoPortal.propTypes = {
   photo: PropTypes.string.isRequired,
+  productName: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   nextClick: PropTypes.func.isRequired,
   prevClick: PropTypes.func.isRequired,

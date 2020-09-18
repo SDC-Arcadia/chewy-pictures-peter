@@ -108,7 +108,7 @@ class MainPhoto extends React.Component {
   }
 
   render() {
-    const { photo, nextClick, prevClick } = this.props;
+    const { photo, nextClick, prevClick, productName } = this.props;
     const {
       portalOn, zoomOn, zoomBackgroundPosition, hoverOn,
     } = this.state;
@@ -144,6 +144,7 @@ class MainPhoto extends React.Component {
               <MainPhotoPortal
                 onClick={this.handlePortalClose}
                 photo={photo}
+                productName={productName}
                 nextClick={nextClick}
                 prevClick={prevClick}
               />
@@ -170,6 +171,7 @@ export default MainPhoto;
 
 MainPhoto.propTypes = {
   photo: PropTypes.string.isRequired,
+  productName: PropTypes.string.isRequired,
   nextClick: PropTypes.func.isRequired,
   prevClick: PropTypes.func.isRequired,
 };

@@ -6,6 +6,8 @@ import Thumbnail from './Thumbnail';
 const ThumbnailListWrapper = styled.div`
   grid-area: thumbs;
   display: flex;
+  align-items: flex-start;
+  position: relative;
   height: ${(props) => props.height};
   flex-direction: ${(props) => props.thumbDirection};
   width: 100%;

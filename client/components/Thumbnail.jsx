@@ -9,9 +9,6 @@ const Thumb = styled.img`
   box-sizing: border-box;
   width: ${(props) => props.thumbWidth};
   height: 60px;
-  float: left;
-  vertical-align: middle;
-  text-align: center;
   padding: ${(props) => props.thumbPadding};
   margin: 0 4px 6px 0;
   border: ${(props) => props.active ? '2px solid orange' : '1px solid #ddd'};
