@@ -10,30 +10,46 @@ const bluePrevArrowLeft = 'https://rpt22-fec-kwame.s3-us-west-1.amazonaws.com/im
 
 const PrevWrapper = styled.div`
   grid-area: prev;
-  background: ${(props) => props.photos ? `url(${bluePrevArrowTop})` : `url(${greyPrevArrowTop})` } 50% no-repeat;
-  background-size: 18px;
-  height: 20px;
-
-  @media screen and (max-width: 650px) {
-    background: ${(props) => props.photos ? `url(${bluePrevArrowLeft})` : `url(${greyPrevArrowLeft})` } 50% no-repeat;
-    background-size: 12px;
-    width: 25px;
-  }
+  background: ${(props) => `url(${props.bg})`} 50% no-repeat;
+  background-size: ${(props) => props.bgs};
+  height: ${(props) => props.h};
+  width: ${(props) => props.w};
 `;
 
 const PrevTag = styled.a`
   display: none;
 `;
 
-const Prev = ({ photos, handleClick }) => (
-  <PrevWrapper photos={!!photos} onClick={handleClick}>
-    <PrevTag href="">Prev</PrevTag>
-  </PrevWrapper>
-);
+const Prev = ({ photos, handleClick, thumbDirection }) => {
+  let bg;
+  let bgs;
+  let h;
+  let w;
+
+  if (thumbDirection === 'column') {
+    // eslint-disable-next-line no-extra-boolean-cast
+    bg = (!!photos) ? bluePrevArrowTop : greyPrevArrowTop;
+    bgs = '18px';
+    h = '20px';
+    w = '104px';
+  } else {
+    // eslint-disable-next-line no-extra-boolean-cast
+    bg = (!!photos) ? bluePrevArrowLeft : greyPrevArrowLeft;
+    bgs = '12px';
+    h = '20px';
+    w = '25px';
+  }
+  return (
+    <PrevWrapper bg={bg} bgs={bgs} w={w} h={h} onClick={handleClick}>
+      <PrevTag href="">Prev</PrevTag>
+    </PrevWrapper>
+  );
+};
 
 export default Prev;
 
 Prev.propTypes = {
   photos: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
+  thumbDirection: PropTypes.string.isRequired,
 };

@@ -8,37 +8,29 @@ import MainPhotoPortalWrapper from './MainPhotoPortalWrapper';
 import MainPhotoPortal from './MainPhotoPortal';
 import ZoomPortalWrapper from './ZoomPortalWrapper';
 import ZoomPortal from './ZoomPortal';
+import MainPhotoHover from './MainPhotoHover';
 
 const MainPhotoWrapper = styled.div`
   grid-area: main;
   display: flex;
   position: relative;
-  background: ${(props) => `url(${props.photo})`} no-repeat;
-  background-position: center center;
+  align-items: center;
+  justify-content: center;
   align-self: center;
   justify-self: center;
   box-sizing: border-box;
   height: 400px;
   width: 400px;
-  ${'' /* border: 5px solid red; */}
 `;
-
-// const PhotoHoverDiv = styled.div`
-//   height: 100px;
-//   width: 100px;
-//   background: rgba(255, 255, 255, .75);
-//   position: absolute;
-//   top: ${(props) => `${props.hoverY - 50}px`};
-//   left: ${(props) => `${props.hoverX - 50}px`};
-
-// `;
 
 class MainPhoto extends React.Component {
   constructor(props) {
     super(props);
+    this.mainPhotoRef = React.createRef();
     this.state = {
       portalOn: false,
       zoomOn: false,
+      hoverOn: false,
       zoomBackgroundPosition: '0% 0%',
     };
     this.handlePortalCreate = this.handlePortalCreate.bind(this);
@@ -63,31 +55,53 @@ class MainPhoto extends React.Component {
   handleMainPhotoMouseEnter() {
     this.setState({
       zoomOn: true,
-
+      hoverOn: true,
     });
   }
 
   handleMainPhotoMouseLeave() {
     this.setState({
       zoomOn: false,
-
+      hoverOn: false,
     });
   }
 
   handleMainPhotoMouseMove(e) {
+    e.preventDefault();
     // get main photo screen coordinates and width/height
     const {
       left, top, width, height,
     } = e.target.getBoundingClientRect();
 
-    // calculate new backgroundPosition based on mouse coordinates
-    const xPosition = (e.pageX - left) / width * 100;
-    const yPosition = (e.pageY - top) / height * 100;
+    const hoverNode = this.mainPhotoRef.current;
+    const wOffset = hoverNode.offsetWidth / 2;
+    const hOffset = hoverNode.offsetHeight / 2;
 
-    // const hoverX = e.clientX - left;
-    // const hoverY = e.clientY - top;
-    // console.log(e.pageX, e.pageY);
-    // console.log(e.clientX - left, e.clientY - top);
+    // calculate new backgroundPosition and hover box based on mouse coordinates
+    const mouseX = e.pageX - left - window.pageXOffset;
+    const mouseY = e.pageY - top - window.pageYOffset;
+    const xPosition = (mouseX / width) * 100;
+    const yPosition = (mouseY / height) * 100;
+
+    let x = mouseX - wOffset;
+    let y = mouseY - hOffset;
+
+    if (mouseX > width - wOffset) {
+      x = width - (2 * wOffset);
+    }
+    if (mouseX < wOffset) {
+      x = 0;
+    }
+    if (mouseY > height - hOffset) {
+      y = height - (2 * hOffset);
+    }
+    if (mouseY < hOffset) {
+      y = 0;
+    }
+
+    hoverNode.style.left = `${x}px`;
+    hoverNode.style.top = `${y}px`;
+
     this.setState({
       zoomBackgroundPosition: `${xPosition}% ${yPosition}%`,
     });
@@ -95,18 +109,33 @@ class MainPhoto extends React.Component {
 
   render() {
     const { photo, nextClick, prevClick } = this.props;
-    const { portalOn, zoomOn, zoomBackgroundPosition } = this.state;
+    const {
+      portalOn, zoomOn, zoomBackgroundPosition, hoverOn,
+    } = this.state;
 
     return (
       <>
 
         <MainPhotoWrapper
-          photo={photo}
-          onClick={this.handlePortalCreate}
-          onMouseMove={this.handleMainPhotoMouseMove}
           onMouseEnter={this.handleMainPhotoMouseEnter}
           onMouseLeave={this.handleMainPhotoMouseLeave}
-        />
+          onClick={this.handlePortalCreate}
+        >
+          <img
+            src={photo}
+            onMouseMove={this.handleMainPhotoMouseMove}
+            alt=""
+          />
+          {
+            hoverOn
+            && (
+              <MainPhotoHover
+                ref={this.mainPhotoRef}
+              />
+            )
+          }
+
+        </MainPhotoWrapper>
         {
           portalOn
           && (
