@@ -73,8 +73,9 @@ object-assign
   dislay: flex;
   justify-self: center;
   align-self: center;
-  width: 50vw;
-  height: auto;
+  height: 90vh;
+  max-height: 90vh;
+  width: auto;
 `,T=l.a.div`
   grid-area: prev;
   display: flex;
