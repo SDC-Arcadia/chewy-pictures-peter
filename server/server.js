@@ -55,6 +55,5 @@ app.get('/review-photos/:productId', (req, res) => {
   });
 });
 
-
 // eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`Web Server Listenting on Port: ${PORT}`));

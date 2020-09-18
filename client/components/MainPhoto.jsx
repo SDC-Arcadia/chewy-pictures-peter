@@ -73,14 +73,14 @@ class MainPhoto extends React.Component {
       left, top, width, height,
     } = e.target.getBoundingClientRect();
 
-    console.log('bounding info - l, t, w, h', left, top, width, height);
-
     const hoverNode = this.mainPhotoRef.current;
     const wOffset = hoverNode.offsetWidth / 2;
     const hOffset = hoverNode.offsetHeight / 2;
 
     // calculate new backgroundPosition and hover box based on mouse coordinates
+    // eslint-disable-next-line no-undef
     const mouseX = e.pageX - left - window.pageXOffset;
+    // eslint-disable-next-line no-undef
     const mouseY = e.pageY - top - window.pageYOffset;
     const xPosition = (mouseX / width) * 100;
     const yPosition = (mouseY / height) * 100;
@@ -95,7 +95,7 @@ class MainPhoto extends React.Component {
       x = 0;
     }
     if (mouseY > height - hOffset) {
-      y = height - 2 *hOffset;
+      y = height - 2 * hOffset;
     }
     if (mouseY < hOffset) {
       y = 0;
