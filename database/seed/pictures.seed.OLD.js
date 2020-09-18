@@ -1,4 +1,3 @@
-/* eslint-disable */
 const { sprintf } = require('sprintf-js');
 const { db, Picture, emptyCollection } = require('../dbConnection.js');
 const AWS = require('./aws.js');
@@ -27,24 +26,19 @@ const s3request = s3.listObjects(params).promise();
 s3request.then((data) => {
   // returns array of objects, with s3 objet details
   // parse out the image info and insert into the database
-
   for (let i = 1; i < 101; i += 1) {
     // build image object with id of P001, P002, etc.- up to P100
     const obj = {};
     obj.product_id = `P${sprintf('%03d', i)}`;
-
-    [['images', 6, 7], ['reviews', 8, 13]].forEach((collection) => {
-      obj[collection[0]] = [];
-      // fill images array with random number (between 6 and 12) of random images from S3
-      numOfImages = collection[1] + Math.floor(Math.random() * collection[2]);
-      for (let j = 0; j < numOfImages; j += 1) {
-        // grab random image from S3 and add it as product image
-        randomImage = Math.floor(1 + Math.random() * 199);
-        imgUrl = `${s3ImgUrlBase}${data.Contents[randomImage].Key}`;
-        obj[collection[0]].push({ img_url: imgUrl });
-
-      }
-    });
+    obj.images = [];
+    // fill images array with random number (between 6 and 12) of random images from S3
+    numOfImages = 6 + Math.floor(Math.random() * 7);
+    for (let j = 0; j < numOfImages; j += 1) {
+      // grab random image from S3 and add it as product image
+      randomImage = Math.floor(Math.random() * 199);
+      imgUrl = `${s3ImgUrlBase}${data.Contents[randomImage].Key}`;
+      obj.images.push({ img_url: imgUrl });
+    }
     pictureData.push(obj);
   }
   // after 100 database records have been built, add to database

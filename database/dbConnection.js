@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 // define db connection, schema and model
 // mongodb://localhost/FEC'
+// mongodb://mongo-db/FEC
 mongoose.connect('mongodb://mongo-db/FEC', { useNewUrlParser: true }, (error) => {
   if (error) {
     // eslint-disable-next-line no-console
@@ -19,6 +20,7 @@ const db = mongoose.connection;
 const pictureSchema = new Schema({
   product_id: String,
   images: [{ img_url: String }],
+  reviews: [{ img_url: String }],
 }, { collection: 'Pictures' });
 
 const Picture = mongoose.model('Picture', pictureSchema);
