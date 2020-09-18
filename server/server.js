@@ -10,9 +10,7 @@ const PORT = process.env.PORT || 3004;
 app.use(cors());
 app.use(compression());
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, '../public'), {
-  maxAge: 5000,
-}));
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 const buildApiResponse = (dbRecord, imgType) => {
   const apiResponse = {};
