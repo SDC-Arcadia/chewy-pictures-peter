@@ -12,7 +12,10 @@ class ZoomPortalWrapper extends React.Component {
   }
 
   componentDidMount() {
-    zoomPortalRoot.appendChild(this.element);
+    // zoomPortalRoot.appendChild(this.element);
+    this.element.style.position = 'absolute';
+    this.element.style.zIndex = '999';
+    zoomPortalRoot.prepend(this.element);
   }
 
   componentWillUnmount() {
