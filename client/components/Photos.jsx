@@ -7,7 +7,7 @@ import Prev from './Prev';
 import Next from './Next';
 import Zoom from './Zoom';
 
-const IMAGES_URL = 'http://ec2-13-57-207-233.us-west-1.compute.amazonaws.com:3004';
+const IMAGES_URL = 'http://ec2-54-67-122-61.us-west-1.compute.amazonaws.com:3004';
 const PRODUCT_URL = 'http://3.218.98.72:3001';
 
 const Container = styled.div`
