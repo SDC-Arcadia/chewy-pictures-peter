@@ -17,7 +17,21 @@
 
 ## Usage
 
-> Some usage instructions
+> CRUD API Below:
+
+Product Photos
+
+Create - POST '/photos/:productId'
+Read - GET '/photos/:productId'
+Update - PUT '/photos/:productId/:pictureId'
+Delete - DELETE '/photos/:productId/:pictureId'
+
+Review Photos
+Create - POST '/review-photos/:productId'
+Read - GET '/review-photos/:productId'
+Update - PUT '/review-photos/:productId/:pictureId'
+Delete - DELETE '/review-photos/:productId/:pictureId'
+
 
 ## Requirements
 
