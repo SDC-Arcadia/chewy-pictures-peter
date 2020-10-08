@@ -1,6 +1,6 @@
 const { Picture } = require('../database/dbConnection.js');
 
-const buildApiResponse = (dbRecord, imgType) => {
+exports.buildApiResponse = (dbRecord, imgType) => {
   const apiResponse = {};
   apiResponse.product_id = dbRecord.product_id;
   apiResponse.image_urls = [];
@@ -10,6 +10,22 @@ const buildApiResponse = (dbRecord, imgType) => {
   });
   return apiResponse;
 };
+
+// generalizing get request to support reviews AND images
+// exports.get = async function getPictures(req, res, target) {
+//   const { productId } = req.params;
+//   try {
+//     // const result = await Picture.findOne({ product_id: productId }).exec();
+//     const result = await Picture.findOne({ [product_id]: productId}).exec();
+//     console.log(result);
+//     res.status(200)
+//     res.send(buildApiResponse(result, target));
+//     res.end();
+//   } catch {
+//     res.status(404);
+//     res.end();
+//   }
+// }
 
 // Retrieves all pictures from the database
 exports.getPictures = async function getPicturesFromDatabase(req, res) {
