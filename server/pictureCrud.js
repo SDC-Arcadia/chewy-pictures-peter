@@ -14,7 +14,6 @@ const buildApiResponse = (dbRecord, imgType) => {
 // Retrieves all pictures from the database
 exports.getPictures = async function getPicturesFromDatabase(req, res) {
   const { productId } = req.params;
-  console.log(productId);
   try {
     // const result = await Picture.findOne({ product_id: productId }).exec();
     const result = await Picture.findOne({ product_id: productId}).exec();
@@ -28,27 +27,27 @@ exports.getPictures = async function getPicturesFromDatabase(req, res) {
   }
 };
 
-// Inserts 1 or more pictures into the database
+// Inserts 1 picture into the database
 exports.createPictures = async function createPicturesInDatabase(req, res) {
-  const {newImageLinks} = req.body;
-  const {productId: product_id} = req.params;
+  const {newImageLink} = req.body;
+  const {productId} = req.params;
   let currentProduct;
 
   // find product
   try {
-    currentProduct = await Picture.find({product_id});
+    currentProduct = await Picture.findOne({ product_id: productId}).exec();
   } catch {
     res.status('404');
     res.send('Product does not exist.')
     res.end();
   }
 
-  const {images: imageLinks} = currentProduct;
-  const finalImageLinks = imageLinks.concat(newImageLinks);
+  const {images} = currentProduct;
+  images.push({img_url: newImageLink});
 
   // add picture to product's picture array
   try {
-    await Picture.update({product_id}, {images: finalImageLinks})
+    await Picture.updateOne({product_id: productId}, {images})
     res.status('200');
     res.send('Success!');
     res.end();
@@ -63,12 +62,12 @@ exports.createPictures = async function createPicturesInDatabase(req, res) {
 exports.updatePicture = async function updatePictureInDatabase(req, res) {
   // only one picture will be entered
   const {newImageLink} = req.body;
-  const {productId: product_id, pictureId} = req.params;
+  const {productId, pictureId} = req.params;
   let currentProduct;
 
   // find the product
   try {
-    currentProduct = await Picture.find({product_id});
+    currentProduct = await Picture.findOne({product_id: productId});
   } catch {
     res.status('404');
     res.send('Product does not exist.')
@@ -77,11 +76,12 @@ exports.updatePicture = async function updatePictureInDatabase(req, res) {
 
   // replace the picture
   const {images: imageLinks} = currentProduct;
-  imageLinks.splice(pictureId, 1, newImageLink);
+  imageLinks.splice(pictureId, 1, {img_url: newImageLink});
+  console.log(imageLinks);
 
   // update the db with the removed picture
   try {
-    await Picture.update({product_id}, {images: imageLinks})
+    await Picture.updateOne({product_id: productId}, {images: imageLinks})
     res.status('200');
     res.send('Success!');
     res.end();
@@ -94,12 +94,12 @@ exports.updatePicture = async function updatePictureInDatabase(req, res) {
 
 // Deletes one picture
 exports.deletePicture = async function deletePictureFromDatabase(req, res) {
-  const {productId: product_id, pictureId} = req.params;
+  const {productId, pictureId} = req.params;
   let currentProduct;
 
   // find the product
   try {
-    currentProduct = await Picture.find({product_id});
+    currentProduct = await Picture.findOne({product_id: productId});
   } catch {
     res.status('404');
     res.send('Product does not exist')
@@ -112,12 +112,12 @@ exports.deletePicture = async function deletePictureFromDatabase(req, res) {
 
   // update the db with the removed picture
   try {
-    await Picture.update({product_id}, {imageLinks})
+    await Picture.updateOne({product_id: productId}, {images: imageLinks})
     res.status('200');
     res.send('Success!');
     res.end();
   } catch {
-    console.log('Had trouble posting these pictures.');
+    console.log('Had trouble deleting this picture.');
     res.sendStatus('404')
     res.end();
   }

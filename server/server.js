@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const compression = require('compression');
+const compression = require('compression'); 
 const { queryProduct, Picture } = require('../database/dbConnection.js');
 const { getPictures, createPictures, updatePicture, deletePicture } = require('./pictureCrud.js');
 
@@ -10,7 +10,8 @@ const PORT = process.env.PORT || 3004;
 
 app.use(cors());
 app.use(compression());
-app.use(express.json());
+app.use(express.json({extended: true}));
+app.use(express.urlencoded());
 app.use(express.static(path.resolve(__dirname, '../public')));
 
 // const buildApiResponse = (dbRecord, imgType) => {
