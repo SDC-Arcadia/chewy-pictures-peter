@@ -7,7 +7,7 @@ import Prev from './Prev';
 import Next from './Next';
 import Zoom from './Zoom';
 
-const IMAGES_URL = 'http://ec2-54-67-122-61.us-west-1.compute.amazonaws.com:3004';
+const IMAGES_URL = 'http://127.0.0.1:3004';
 const PRODUCT_URL = 'http://3.218.98.72:3001';
 
 const Container = styled.div`
@@ -53,7 +53,6 @@ export default class Photos extends React.Component {
     // eslint-disable-next-line no-undef
     const parsedUrl = new URL(window.location.href);
     const productId = parsedUrl.searchParams.get('productId');
-
     const getImages = this.getPhotoUrl(productId);
 
     const getProduct = this.getProductDetail(productId);
