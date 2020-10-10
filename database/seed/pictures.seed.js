@@ -9,8 +9,8 @@ emptyCollection((err) => console.log('Error Deleting Collection', err));
 
 // get array of pictures in S3 Bucket
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
-const s3KeyBase = 'images/product/V2';
-const s3Bucket = 'rpt22-fec-kwame';
+const s3KeyBase = 'images/product';
+const s3Bucket = 'sdc-chewy';
 const s3ImgUrlBase = `https://${s3Bucket}.s3-us-west-1.amazonaws.com/`;
 // build array of data to insert into db
 const pictureData = [];

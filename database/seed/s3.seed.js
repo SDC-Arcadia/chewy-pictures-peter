@@ -10,14 +10,17 @@ const stream = require('stream');
 const Promise = require('promise');
 const AWS = require('./aws.js');
 
+const creds = new AWS.SharedIniFileCredentials({ profile: 'default' });
+AWS.config.credentials = creds;
+
 const httpsAgent = new https.Agent({
   keepAlive: true,
   maxSockets: 25,
 });
 
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
-const s3KeyBase = 'images/product/V2';
-const s3Bucket = 'rpt22-fec-kwame';
+const s3KeyBase = 'images/product';
+const s3Bucket = 'sdc-chewy';
 
 // Function to get stream from axios, pipe to s3 bucket
 const streamToS3 = async (imgNum, width, height) => {
@@ -63,7 +66,7 @@ let randomWidth = null;
 let randomHeight = null;
 const s3PromiseArray = [];
 
-for (let i = 1; i <= 200; i += 1) {
+for (let i = 1; i <= 1; i += 1) {
   // generate sizeOptions for picture requst
   randomWidth = sizeOptions[Math.floor(Math.random() * 2)];
   randomHeight = sizeOptions[Math.floor(Math.random() * 2)];
