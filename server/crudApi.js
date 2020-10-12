@@ -35,7 +35,7 @@ exports.getPictures = async function getPicturesFromDatabase(req, res) {
     const result = await Picture.findOne({ product_id: productId}).exec();
     console.log(result);
     res.status(200)
-    res.send(buildApiResponse(result, 'images'));
+    res.send(exports.buildApiResponse(result, 'images'));
     res.end();
   } catch {
     res.status(404);
