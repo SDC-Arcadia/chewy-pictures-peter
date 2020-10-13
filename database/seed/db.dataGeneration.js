@@ -14,7 +14,7 @@ const s3ImgUrlBase = `https://${s3Bucket}.s3-us-west-2.amazonaws.com/`;
 
 // create JSON file for data to insert into db
 
-const generateJSON = async function generateJSONImagesFromS3(fileName) {
+const generateJSON = async function generateJSONImagesFromS3(fileName, imageKey) {
   const newFilePath = path.join(__dirname, fileName);
   
   const params = {
@@ -30,21 +30,21 @@ const generateJSON = async function generateJSONImagesFromS3(fileName) {
   for (let batch = 0; batch < 100; batch++) {
     // each batch contains 100K products
     const imageCollection = [];
-    for (let i = 1; i <= 100000; i +=1) {
+    for (let i = 1; i <= 100000; i += 1) {
       const pictureCount = Math.floor(Math.random() * 5) + 3
       
       for (let imageIndex = 1; imageIndex <= pictureCount; imageIndex += 1) {
         const randomImageIndex = Math.floor(Math.random() * 1000);
         const randomImageKey = s3request.Contents[randomImageIndex].Key;
         const randomImageLink = `${s3ImgUrlBase}${randomImageKey}`;
-        const productId = i + (batch * 10)
+        const productId = i + (batch * 100000)
 
         imageCount += 1; 
 
         const currentRecord = {
           _id: imageCount,
           product_id: productId,
-          image_url: randomImageLink
+          [imageKey]: randomImageLink
         };
         imageCollection.push(currentRecord);
       }
@@ -59,4 +59,4 @@ const generateJSON = async function generateJSONImagesFromS3(fileName) {
   }
 }
 
-generateJSON('productPictures.json');
+generateJSON('reviewPictures.json', 'review_url');
