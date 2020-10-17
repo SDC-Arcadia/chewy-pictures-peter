@@ -1,3 +1,4 @@
 node_modules
 .env
-productPictures.json
+database/seed/productPictures.json
+database/seed/reviewPictures.json
