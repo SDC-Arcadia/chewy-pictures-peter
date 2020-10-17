@@ -10,14 +10,16 @@ const stream = require('stream');
 const Promise = require('promise');
 const AWS = require('./aws.js');
 
+AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: 'default' });
+
 const httpsAgent = new https.Agent({
   keepAlive: true,
   maxSockets: 25,
 });
 
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
-const s3KeyBase = 'images/product/V2';
-const s3Bucket = 'rpt22-fec-kwame';
+const s3KeyBase = 'images/product';
+const s3Bucket = 'sdc-chewy';
 
 // Function to get stream from axios, pipe to s3 bucket
 const streamToS3 = async (imgNum, width, height) => {
@@ -33,6 +35,7 @@ const streamToS3 = async (imgNum, width, height) => {
       Key: `${s3KeyBase}/img${imgNum}.jpeg`,
       ContentType: contentType,
     };
+
     s3promise = s3.upload(params).promise();
     return passThrough;
   };
@@ -63,7 +66,7 @@ let randomWidth = null;
 let randomHeight = null;
 const s3PromiseArray = [];
 
-for (let i = 1; i <= 200; i += 1) {
+for (let i = 1; i <= 1000; i += 1) {
   // generate sizeOptions for picture requst
   randomWidth = sizeOptions[Math.floor(Math.random() * 2)];
   randomHeight = sizeOptions[Math.floor(Math.random() * 2)];
@@ -71,6 +74,7 @@ for (let i = 1; i <= 200; i += 1) {
 }
 
 // Resolve picture upload stream promises
+// Note -- this will return an array of nulls due to scoping & async operations.
 // eslint-disable-next-line no-console
 Promise.all(s3PromiseArray).then((results) => console.log('promise all results --->', results))
 // eslint-disable-next-line no-console

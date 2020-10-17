@@ -34,30 +34,34 @@ const Picture = mongoose.model('Picture', pictureSchema);
 
 // New schema without nested subdocuments
 // n much larger, but requires only 1 network request
-// const productImageSchema = new Schema({
-//   _id: String,
-//   product_id: String,
-//   image_url: String,
-// });
+const productImageSchema = new Schema({
+  _id: String,
+  product_id: String,
+  image_url: String,
+});
 
-// const reviewImageSchema = new Schema({
-//   _id: String,
-//   product_id: String,
-//   review_url: String,
-// });
+const ProductImage = mongoose.model('ProductImage', productImageSchema);
 
-// const queryProduct = (productId, callback) => {
-//   Picture.findOne({ product_id: productId }, (err, result) => {
-//     if (err) {
-//       callback(err, null);
-//     } else {
-//       callback(null, result);
-//     }
-//   });
-// };
+const reviewImageSchema = new Schema({
+  _id: String,
+  product_id: String,
+  review_url: String,
+});
 
-const emptyCollection = (callback) => {
-  Picture.deleteMany({}, (err) => {
+const ReviewImage = mongoose.model('ReviewImage', reviewImageSchema);
+
+const queryProduct = (productId, callback) => {
+  Picture.findOne({ product_id: productId }, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
+
+const emptyCollection = (model, callback) => {
+  model.deleteMany({}, (err) => {
     if (err) {
       callback(err);
     }
@@ -66,5 +70,7 @@ const emptyCollection = (callback) => {
 
 module.exports.db = db;
 module.exports.Picture = Picture;
-// module.exports.queryProduct = queryProduct;
+module.exports.ProductImage = ProductImage;
+module.exports.ReviewImage = ReviewImage;
+module.exports.queryProduct = queryProduct;
 module.exports.emptyCollection = emptyCollection;
