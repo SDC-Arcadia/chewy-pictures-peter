@@ -1,4 +1,4 @@
-const { Picture, ProductImage, ReviewImage } = require('../database/dbConnection.js');
+const { Picture, ProductImage, ReviewImage } = require('../database/mongodbConnection.js');
 
 exports.buildApiResponse = (dbRecord, imgType) => {
   const apiResponse = {};

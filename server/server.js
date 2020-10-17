@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const compression = require('compression'); 
-const { queryProduct } = require('../database/dbConnection.js');
+const { queryProduct } = require('../database/mongodbConnection.js');
 const {
   getPictures,
   createPictures,
