@@ -1,4 +1,4 @@
-const { Picture } = require('../database/dbConnection.js');
+const { Picture, ProductImage, ReviewImage } = require('../database/dbConnection.js');
 
 exports.buildApiResponse = (dbRecord, imgType) => {
   const apiResponse = {};
@@ -11,21 +11,6 @@ exports.buildApiResponse = (dbRecord, imgType) => {
   return apiResponse;
 };
 
-// generalizing get request to support reviews AND images
-// exports.get = async function getPictures(req, res, target) {
-//   const { productId } = req.params;
-//   try {
-//     // const result = await Picture.findOne({ product_id: productId }).exec();
-//     const result = await Picture.findOne({ [product_id]: productId}).exec();
-//     console.log(result);
-//     res.status(200)
-//     res.send(buildApiResponse(result, target));
-//     res.end();
-//   } catch {
-//     res.status(404);
-//     res.end();
-//   }
-// }
 
 // Retrieves all pictures from the database
 exports.getPictures = async function getPicturesFromDatabase(req, res) {
@@ -47,23 +32,10 @@ exports.getPictures = async function getPicturesFromDatabase(req, res) {
 exports.createPictures = async function createPicturesInDatabase(req, res) {
   const {newImageLink} = req.body;
   const {productId} = req.params;
-  let currentProduct;
 
-  // find product
+  // add picture to product image collection
   try {
-    currentProduct = await Picture.findOne({ product_id: productId}).exec();
-  } catch {
-    res.status('404');
-    res.send('Product does not exist.')
-    res.end();
-  }
-
-  const {images} = currentProduct;
-  images.push({img_url: newImageLink});
-
-  // add picture to product's picture array
-  try {
-    await Picture.updateOne({product_id: productId}, {images})
+    await ProductImage.create({product_id: productId, image_url: newImageLink})
     res.status('200');
     res.send('Success!');
     res.end();
@@ -78,26 +50,11 @@ exports.createPictures = async function createPicturesInDatabase(req, res) {
 exports.updatePicture = async function updatePictureInDatabase(req, res) {
   // only one picture will be entered
   const {newImageLink} = req.body;
-  const {productId, pictureId} = req.params;
-  let currentProduct;
-
-  // find the product
+  const {pictureId} = req.params;
+  
+  // update the db with the correct picture
   try {
-    currentProduct = await Picture.findOne({product_id: productId});
-  } catch {
-    res.status('404');
-    res.send('Product does not exist.')
-    res.end();
-  }
-
-  // replace the picture
-  const {images: imageLinks} = currentProduct;
-  imageLinks.splice(pictureId, 1, {img_url: newImageLink});
-  console.log(imageLinks);
-
-  // update the db with the removed picture
-  try {
-    await Picture.updateOne({product_id: productId}, {images: imageLinks})
+    await ProductImage.updateOne({_id: pictureId}, {image_url: newImageLink})
     res.status('200');
     res.send('Success!');
     res.end();
@@ -110,25 +67,11 @@ exports.updatePicture = async function updatePictureInDatabase(req, res) {
 
 // Deletes one picture
 exports.deletePicture = async function deletePictureFromDatabase(req, res) {
-  const {productId, pictureId} = req.params;
-  let currentProduct;
+  const {pictureId} = req.params;
 
-  // find the product
+  // delete the single picture
   try {
-    currentProduct = await Picture.findOne({product_id: productId});
-  } catch {
-    res.status('404');
-    res.send('Product does not exist')
-    res.end();
-  }
-
-  // remove the picture
-  const {images: imageLinks} = currentProduct;
-  imageLinks.splice(pictureId, 1);
-
-  // update the db with the removed picture
-  try {
-    await Picture.updateOne({product_id: productId}, {images: imageLinks})
+    await ProductImage.deleteOne({_id: pictureId})
     res.status('200');
     res.send('Success!');
     res.end();
