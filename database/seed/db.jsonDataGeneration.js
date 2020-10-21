@@ -59,4 +59,4 @@ const generateJSON = async function generateJSONImagesFromS3(fileName, imageKey)
   }
 }
 
-generateJSON('reviewPictures.json', 'review_url');
+// generateJSON('reviewPictures.json', 'review_url');
