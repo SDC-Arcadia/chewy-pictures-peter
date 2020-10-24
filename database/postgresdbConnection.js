@@ -4,26 +4,27 @@ const sql = postgres('postgres://username:password@host:port/database', {
   host: 'localhost',
   port: '5432',
   database: 'chewy_images',
+  username: 'postgres',
   // update this to use an environment variable if using in production
   password: 'password',
   connection: {
-    application_name: 'chewyPictures.js',
+    application_name: 'postgres.js',
   },
 });
 
 const createTables = async function createProductAndReviewImageTables() {
   await sql`
      CREATE TABLE IF NOT EXISTS ProductImage (
-       _id INT PRIMARY KEY NOT NULL,
-       product_id INT NOT NULL,
-       image_url: text
+       _id TEXT PRIMARY KEY NOT NULL,
+       product_id TEXT,
+       image_url TEXT
      );
     `;
   await sql`
      CREATE TABLE IF NOT EXISTS ReviewImage(
-      _id INT PRIMARY KEY NOT NULL,
-      product_id INT NOT NULL,
-      review_url: text
+      _id TEXT PRIMARY KEY NOT NULL,
+      product_id TEXT,
+      review_url TEXT
      );
     `;
 };

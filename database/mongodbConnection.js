@@ -35,7 +35,6 @@ const Picture = mongoose.model('Picture', pictureSchema);
 // New schema without nested subdocuments
 // n much larger, but requires only 1 network request
 const productImageSchema = new Schema({
-  _id: String,
   product_id: { type: String, index: true },
   image_url: String,
 });
@@ -43,7 +42,6 @@ const productImageSchema = new Schema({
 const ProductImage = mongoose.model('ProductImage', productImageSchema);
 
 const reviewImageSchema = new Schema({
-  _id: String,
   product_id: { type: String, index: true },
   review_url: String,
 });

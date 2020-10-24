@@ -1,9 +1,13 @@
+// DO NOT RUN THIS FILE EXCEPT FOR TESTING REASONS
 const { sql } = require('../postgresdbConnection');
 const path = require('path');
 
 // To Seed the database, run the command below
-// cat postgresProductPictures.csv | psql -h localhost -p 5432 chewy_images -U postgres -c "COPY productimage FROM STDIN WITH DELIMITER ',';" 
-// cat postgresReviewPictures.csv | psql -h localhost -p 5432 chewy_images -U postgres -c "COPY reviewimage FROM STDIN WITH DELIMITER ',';" 
+
+/* cat postgresProductPictures.csv | psql -h localhost -p 5432 chewy_images -U postgres -c "COPY productimage FROM STDIN WITH DELIMITER ',';" 
+
+cat postgresReviewPictures.csv | psql -h localhost -p 5432 chewy_images -U postgres -c "COPY reviewimage FROM STDIN WITH DELIMITER ',';" 
+*/
 
 const seedTable = async function dropCreateAndSeedTables(tableName) {
   let urlColumnName;
@@ -19,9 +23,11 @@ const seedTable = async function dropCreateAndSeedTables(tableName) {
     fileName = 'postgresReviewPictures.csv'
   }
 
+  console.log(tableName);
+
   try { 
     await sql`
-      DROP TABLE IF EXISTS ${tableName};
+      DROP TABLE IF EXISTS testTable;
     `;
   } catch {
     console.log('error dropping table');
@@ -29,24 +35,24 @@ const seedTable = async function dropCreateAndSeedTables(tableName) {
   
   try { 
     await sql`
-      CREATE TABLE IF NOT EXISTS ${tableName} (
+      CREATE TABLE IF NOT EXISTS testTable (
         _id TEXT PRIMARY KEY NOT NULL,
         product_id TEXT NOT NULL,
-        ${urlColumnName} TEXT
+        test TEXT
       );
     `;
   } catch {
     console.log('error creating table');
   }
 
-  try {
-    await sql`
-      COPY ${tableName}
-        FROM ${path.join(__dirname, fileName)};
-    `;
-  } catch {
-    console.log('error copying data');
-  }
+  // try {
+  //   await sql`
+  //     COPY ${tableName}
+  //       FROM ${path.join(__dirname, fileName)};
+  //   `;
+  // } catch {
+  //   console.log('error copying data');
+  // }
 };
 
 seedTable('testTable');
