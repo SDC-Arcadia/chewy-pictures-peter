@@ -10,7 +10,6 @@ exports.buildApiResponse = (productId, dbResultArray, imgType) => {
     apiResponse.image_urls.push(image[imgType]);
     apiResponse.pictureId.push(image._id);
   });
-  console.log(apiResponse);
   return apiResponse;
 };
 
