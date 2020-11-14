@@ -22,7 +22,6 @@ const seedImages = function seedImagesIntoMongo(file, modelName) {
   });
   const json = readStream.on('data', () => {}).pipe(JSONStream.parse('*'));
 
-  let documentUploadCount = 0;
   let documentBatchArray = [];
   json.pipe(eventStream.map((document) => {
     documentBatchArray.push(document);
@@ -34,12 +33,13 @@ const seedImages = function seedImagesIntoMongo(file, modelName) {
           return error;
         }
         documentBatchArray = [];
-        documentUploadCount += 100000;
         console.log(docs);
-        console.log(`Inserted ${documentUploadCount} documents into database`);
       });
     }
   }));
 };
 
 seedImages(path.join(__dirname, 'reviewPictures.json'), ReviewImage);
+
+// mongoimport --db chewyPictures --collection productimages --file productPictures.csv --type csv --headerline
+// mongoimport --db chewyPictures --collection reviewimages --file reviewPictures.csv --type csv --headerline

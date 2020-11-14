@@ -42,7 +42,6 @@ const generateJSON = async function generateJSONImagesFromS3(fileName, imageKey)
         imageCount += 1; 
 
         const currentRecord = {
-          _id: imageCount,
           product_id: productId,
           [imageKey]: randomImageLink
         };
@@ -59,4 +58,4 @@ const generateJSON = async function generateJSONImagesFromS3(fileName, imageKey)
   }
 }
 
-// generateJSON('reviewPictures.json', 'review_url');
+generateJSON('productPictures.json', 'image_url');
