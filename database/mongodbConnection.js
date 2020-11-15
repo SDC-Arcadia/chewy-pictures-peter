@@ -11,6 +11,7 @@ const { DATABASE_ADDRESS: mongoUrl } = process.env;
 
 // const awsFec = 'mongodb://mongo-db/FEC';
 const mongoDbAddress = `${mongoUrl}/chewyPictures`;
+console.log(mongoDbAddress);
 
 // peter: made updates to this next line. need to resolve
 mongoose.connect(mongoDbAddress, { useNewUrlParser: true }, (error) => {
