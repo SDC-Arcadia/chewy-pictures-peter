@@ -3,12 +3,12 @@ import http from 'k6/http';
 import { check } from 'k6';
 import { Rate } from 'k6/metrics';
 
-const serverUrl = 'http://127.0.0.1:3004';
+const serverUrl = 'http://44.240.242.83:3004';
 
 const errorRate = new Rate('errorRate');
 
 export const options = {
-  duration: '100s',
+  duration: '10s',
   vus: 50,
 };
 
