@@ -7,7 +7,7 @@ import Prev from './Prev';
 import Next from './Next';
 import Zoom from './Zoom';
 
-const IMAGES_URL = 'http://127.0.0.1:3004';
+const IMAGES_URL = 'http://44.240.242.83:3004';
 const PRODUCT_URL = 'http://3.218.98.72:3001';
 
 const Container = styled.div`

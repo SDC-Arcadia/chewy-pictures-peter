@@ -17,9 +17,15 @@ app.use(express.urlencoded());
 app.use(express.static(path.resolve(__dirname, '../public')));
 
 const loadBalanceConfig = {
-  activeServerAddresses: ['http://127.0.0.1:3004'],
+  activeServerAddresses: [
+    'http://172.31.15.254:3004',
+    'http://172.31.7.56:3004',
+    'http://172.31.4.62:3004',
+  ],
   nextServerUpIndex: 0,
 };
+
+// database ip address: 172.31.2.96
 
 const roundRobinIncrement = function roundRobinIncrement() {
   const { activeServerAddresses, nextServerUpIndex } = loadBalanceConfig;
