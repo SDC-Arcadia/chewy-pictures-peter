@@ -3,7 +3,7 @@ import http from 'k6/http';
 import { check } from 'k6';
 import { Rate } from 'k6/metrics';
 
-const serverUrl = 'http://44.240.242.83:3004';
+const serverUrl = 'http://44.240.242.83:3010';
 
 const errorRate = new Rate('errorRate');
 
