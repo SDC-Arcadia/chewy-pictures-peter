@@ -8,8 +8,20 @@ const serverUrl = 'http://44.240.242.83:3010';
 const errorRate = new Rate('errorRate');
 
 export const options = {
-  duration: '10s',
-  vus: 50,
+  // rps: 10000,
+  // iterations: 100,
+  // vus: 200,
+  // duration: '100s',
+  scenarios: {
+    constant_request_rate: {
+      executor: 'constant-arrival-rate',
+      rate: 10000,
+      timeUnit: '1s',
+      duration: '10s',
+      preAllocatedVUs: 200,
+      maxVUs: 200,
+    },
+  },
 };
 
 export default function runGetRequestTest() {
