@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const compression = require('compression');
+require('dotenv').config();
 
 const {
   getProductPictures,
@@ -19,7 +20,7 @@ const {
 } = require('./reviewPictureCrud');
 
 const app = express();
-const PORT = process.env.PORT || 3004;
+const { PORT } = process.env;
 
 app.use(cors());
 app.use(compression());

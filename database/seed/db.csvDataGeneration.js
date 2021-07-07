@@ -41,12 +41,12 @@ const generateCSV = async function generateCSVImagesFromS3(fileName, imageKey) {
 
         imageCount += 1; 
 
-        imageCollection += `${imageCount},${productId},${randomImageLink}\n`;
+        imageCollection += `${productId},${randomImageLink}\n`;
       }
     }
     
     if (batch === 0) {
-      const csvImageCollection = `_id,product_id,${imageKey}\n${imageCollection}`;
+      const csvImageCollection = `product_id,${imageKey}\n${imageCollection}`;
       await fsPromises.writeFile(newFilePath, csvImageCollection);
     } else {
       const csvImageCollection = imageCollection
@@ -55,4 +55,4 @@ const generateCSV = async function generateCSVImagesFromS3(fileName, imageKey) {
   }
 }
 
-generateCSV('postgresProductPictures.csv', 'image_url');
+generateCSV('reviewPictures.csv', 'review_url');

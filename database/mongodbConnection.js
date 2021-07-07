@@ -1,16 +1,20 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const { Schema } = mongoose;
+
+const { DATABASE_ADDRESS: mongoUrl } = process.env;
 
 // define db connection, schema and model
 // mongodb://localhost/FEC'
 // mongodb://mongo-db/FEC
 
 // const awsFec = 'mongodb://mongo-db/FEC';
-const localSDC = 'mongodb://localhost:27017/chewyPictures';
+const mongoDbAddress = `${mongoUrl}/chewyPictures`;
+console.log(mongoDbAddress);
 
 // peter: made updates to this next line. need to resolve
-mongoose.connect(localSDC, { useNewUrlParser: true }, (error) => {
+mongoose.connect(mongoDbAddress, { useNewUrlParser: true }, (error) => {
   if (error) {
     // eslint-disable-next-line no-console
     console.log('connection error', error);
@@ -35,14 +39,14 @@ const Picture = mongoose.model('Picture', pictureSchema);
 // New schema without nested subdocuments
 // n much larger, but requires only 1 network request
 const productImageSchema = new Schema({
-  product_id: { type: String, index: true },
+  product_id: { type: Number, index: true },
   image_url: String,
 });
 
 const ProductImage = mongoose.model('ProductImage', productImageSchema);
 
 const reviewImageSchema = new Schema({
-  product_id: { type: String, index: true },
+  product_id: { type: Number, index: true },
   review_url: String,
 });
 

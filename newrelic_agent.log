@@ -1,0 +1,100 @@
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75794,"time":"2020-11-05T04:49:31.216Z","msg":"Using New Relic for Node.js. Agent version: 6.14.0; Node version: v10.16.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75794,"time":"2020-11-05T04:49:31.441Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75794,"time":"2020-11-05T04:49:31.986Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75794,"time":"2020-11-05T04:49:31.986Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75794,"time":"2020-11-05T04:49:34.344Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75794,"time":"2020-11-05T04:49:34.344Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID BXZl1q7vUEH1ACzLRzpe-j1fo4S0AAgBAAAnIQEAASgSAgQ6Xvo6AwAGNi4xNC4wAAdzdC1wdnUyAA5DaGV3eSBQaWN0dXJlcw.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75794,"time":"2020-11-05T04:49:34.344Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/2935623/applications/979302970","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75794,"time":"2020-11-05T04:49:34.346Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75794,"time":"2020-11-05T04:49:34.348Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75794,"time":"2020-11-05T04:49:35.352Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75958,"time":"2020-11-05T04:55:00.578Z","msg":"Using New Relic for Node.js. Agent version: 6.14.0; Node version: v10.16.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75958,"time":"2020-11-05T04:55:00.791Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75958,"time":"2020-11-05T04:55:01.050Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75958,"time":"2020-11-05T04:55:01.050Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75958,"time":"2020-11-05T04:55:03.487Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75958,"time":"2020-11-05T04:55:03.487Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID BeEGh5fLTkBkACzLRzpe-j1fo4YcAAgBAAAnIQEAASi2AgQ6Xvo6AwAGNi4xNC4wAAdzdC1wdnUyAA5DaGV3eSBQaWN0dXJlcw.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75958,"time":"2020-11-05T04:55:03.487Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/2935623/applications/979302970","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75958,"time":"2020-11-05T04:55:03.488Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75958,"time":"2020-11-05T04:55:03.491Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":75958,"time":"2020-11-05T04:55:04.496Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":76008,"time":"2020-11-05T04:55:34.101Z","msg":"Using New Relic for Node.js. Agent version: 6.14.0; Node version: v10.16.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":76008,"time":"2020-11-05T04:55:34.258Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":76008,"time":"2020-11-05T04:55:34.528Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":76008,"time":"2020-11-05T04:55:34.528Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":76008,"time":"2020-11-05T04:55:36.707Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":76008,"time":"2020-11-05T04:55:36.707Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID BVt-N22obTNOACzLRzpe-j1fo4YcAAgBAAAnIQEAASjoAgQ6Xvo6AwAGNi4xNC4wAAdzdC1wdnUyAA5DaGV3eSBQaWN0dXJlcw.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":76008,"time":"2020-11-05T04:55:36.707Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/2935623/applications/979302970","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":76008,"time":"2020-11-05T04:55:36.709Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":76008,"time":"2020-11-05T04:55:36.712Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":76008,"time":"2020-11-05T04:55:37.716Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22753,"time":"2020-11-09T04:24:45.161Z","msg":"Using New Relic for Node.js. Agent version: 6.14.0; Node version: v10.16.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22753,"time":"2020-11-09T04:24:45.334Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22753,"time":"2020-11-09T04:24:45.587Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22753,"time":"2020-11-09T04:24:45.587Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22753,"time":"2020-11-09T04:24:47.807Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22753,"time":"2020-11-09T04:24:47.808Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID Bby4rFnKLcdPACzLRzpe-j1fqMTYAAgBAAAnIQEAAFjhAgQ6Xvo6AwAGNi4xNC4wAAdzdC1wdnUyAA5DaGV3eSBQaWN0dXJlcw.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22753,"time":"2020-11-09T04:24:47.808Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/2935623/applications/979302970","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22753,"time":"2020-11-09T04:24:47.809Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22753,"time":"2020-11-09T04:24:47.812Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22753,"time":"2020-11-09T04:24:48.818Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22794,"time":"2020-11-09T04:25:05.338Z","msg":"Using New Relic for Node.js. Agent version: 6.14.0; Node version: v10.16.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22794,"time":"2020-11-09T04:25:05.467Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22794,"time":"2020-11-09T04:25:05.624Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22794,"time":"2020-11-09T04:25:05.625Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22794,"time":"2020-11-09T04:25:07.543Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22794,"time":"2020-11-09T04:25:07.544Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID BYSFTTyzq60eACzLRzpe-j1fqMUUAAgBAAAnIQEAAFkKAgQ6Xvo6AwAGNi4xNC4wAAdzdC1wdnUyAA5DaGV3eSBQaWN0dXJlcw.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22794,"time":"2020-11-09T04:25:07.544Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/2935623/applications/979302970","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22794,"time":"2020-11-09T04:25:07.546Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22794,"time":"2020-11-09T04:25:07.550Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":22794,"time":"2020-11-09T04:25:08.550Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":26401,"time":"2020-11-09T04:36:29.359Z","msg":"Using New Relic for Node.js. Agent version: 6.14.0; Node version: v10.16.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":26401,"time":"2020-11-09T04:36:29.553Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":26401,"time":"2020-11-09T04:36:29.845Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":26401,"time":"2020-11-09T04:36:29.845Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":26401,"time":"2020-11-09T04:36:32.379Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":26401,"time":"2020-11-09T04:36:32.379Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID BZZxfQq7_-YUACzLRzpe-j1fqMeoAAgBAAAnIQEAAGchAgQ6Xvo6AwAGNi4xNC4wAAdzdC1wdnUyAA5DaGV3eSBQaWN0dXJlcw.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":26401,"time":"2020-11-09T04:36:32.379Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/2935623/applications/979302970","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":26401,"time":"2020-11-09T04:36:32.381Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":26401,"time":"2020-11-09T04:36:32.385Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":26401,"time":"2020-11-09T04:36:33.387Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":10949,"time":"2020-11-11T06:12:30.871Z","msg":"Using New Relic for Node.js. Agent version: 6.14.0; Node version: v10.16.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":10949,"time":"2020-11-11T06:12:31.054Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":10949,"time":"2020-11-11T06:12:31.229Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":10949,"time":"2020-11-11T06:12:31.229Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":10949,"time":"2020-11-11T06:12:33.452Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":10949,"time":"2020-11-11T06:12:33.453Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID Bc_nF8_pLiMQACzLRzpe-j1fq4EoAAgBAAAnIQEAACrFAgQ6Xvo6AwAGNi4xNC4wAAdzdC1wdnUyAA5DaGV3eSBQaWN0dXJlcw.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":10949,"time":"2020-11-11T06:12:33.453Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/2935623/applications/979302970","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":10949,"time":"2020-11-11T06:12:33.455Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":10949,"time":"2020-11-11T06:12:33.457Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":10949,"time":"2020-11-11T06:12:34.458Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11051,"time":"2020-11-11T06:13:39.327Z","msg":"Using New Relic for Node.js. Agent version: 6.14.0; Node version: v10.16.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11051,"time":"2020-11-11T06:13:39.482Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11051,"time":"2020-11-11T06:13:39.655Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11051,"time":"2020-11-11T06:13:39.656Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11051,"time":"2020-11-11T06:13:42.143Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11051,"time":"2020-11-11T06:13:42.143Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID BcQ5y5XELRBRACzLRzpe-j1fq4FkAAgBAAAnIQEAACsrAgQ6Xvo6AwAGNi4xNC4wAAdzdC1wdnUyAA5DaGV3eSBQaWN0dXJlcw.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11051,"time":"2020-11-11T06:13:42.143Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/2935623/applications/979302970","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11051,"time":"2020-11-11T06:13:42.145Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11051,"time":"2020-11-11T06:13:42.146Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11051,"time":"2020-11-11T06:13:43.161Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11135,"time":"2020-11-11T06:14:59.334Z","msg":"Using New Relic for Node.js. Agent version: 6.14.0; Node version: v10.16.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11135,"time":"2020-11-11T06:14:59.747Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11135,"time":"2020-11-11T06:15:00.330Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11135,"time":"2020-11-11T06:15:00.331Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11135,"time":"2020-11-11T06:15:02.796Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11135,"time":"2020-11-11T06:15:02.796Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID BQcdEzjXI-LKACzLRzpe-j1fq4HcAAgBAAAnIQEAACt_AgQ6Xvo6AwAGNi4xNC4wAAdzdC1wdnUyAA5DaGV3eSBQaWN0dXJlcw.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11135,"time":"2020-11-11T06:15:02.796Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/2935623/applications/979302970","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11135,"time":"2020-11-11T06:15:02.798Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11135,"time":"2020-11-11T06:15:02.801Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11135,"time":"2020-11-11T06:15:03.801Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11198,"time":"2020-11-11T06:16:25.416Z","msg":"Using New Relic for Node.js. Agent version: 6.14.0; Node version: v10.16.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11198,"time":"2020-11-11T06:16:25.584Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11198,"time":"2020-11-11T06:16:25.743Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11198,"time":"2020-11-11T06:16:25.743Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11198,"time":"2020-11-11T06:16:27.858Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11198,"time":"2020-11-11T06:16:27.858Z","msg":"Connected to collector-009.newrelic.com:443 with agent run ID Bes03e_Rs5zxACzLRzpe-j1fq4IYAAgBAAAnIQEAACu-AgQ6Xvo6AwAGNi4xNC4wAAdzdC1wdnUyAA5DaGV3eSBQaWN0dXJlcw.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11198,"time":"2020-11-11T06:16:27.858Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/2935623/applications/979302970","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11198,"time":"2020-11-11T06:16:27.860Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"analytic_event_data\":833,\"custom_event_data\":83}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11198,"time":"2020-11-11T06:16:27.863Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"st-pvu2","pid":11198,"time":"2020-11-11T06:16:28.868Z","msg":"Starting initial 1000ms harvest."}
